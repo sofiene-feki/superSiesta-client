@@ -1,7 +1,7 @@
 import ModelViewer from "./ModelViewer";
-import iso9001 from "../../assets/iso9001.png";
-import iso14001 from "../../assets/iso14001.png";
-import iso45001 from "../../assets/iso45001.png";
+import iso9001 from "../../assets/Iso9001.png";
+import iso14001 from "../../assets/Iso14001.png";
+import iso45001 from "../../assets/Iso45001.png";
 import { ShieldCheckIcon } from "@heroicons/react/24/outline";
 import bannerBG from "../../assets/bannerBG.jpg";
 import React from "react";
