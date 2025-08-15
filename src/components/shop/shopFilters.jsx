@@ -24,7 +24,7 @@ import {
 import Product from "../product/Product";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setGridView, setListView } from "../../redux/ui/ViewSlice";
+import { setGridView, setListView } from "../../redux/ui/viewSlice";
 import PriceRangeSlider from "./PriceRangeSlider";
 import Pagination from "./Pagination";
 import { useEffect } from "react";
