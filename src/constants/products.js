@@ -4,6 +4,130 @@ import soft from "../assets/product/soft.jpg";
 
 export const products = [
   {
+    id: 4,
+    name: "Medico+ ( Matelas Ortho-Médical )",
+    price: 360,
+    category: "medico",
+    description:
+      "Découvrez le *matelas ortho médical Medico+*:✓ Couche de mousse de densité 28/30 côté ferme✓ Couche de mousse de densité 33kg/m3 côté relaxante✓ Supporte jusqu'à 110kg par personne✓ Réversible : face été , face hiver✓ épaisseur 25cm✓ Tissu anti acarien✓ Retardateur de flamme✓ Ressorts bonnells section 2,3 mm✓ 9 ans de garantie✓ 80 ressorts par m²",
+    details: "Extra-firm foam layers, washable cover, anti-mite treatment.",
+    media: [
+      {
+        type: "image",
+        src: "https://siestaofficiel.com/wp-content/uploads/2025/05/medicoface.webp",
+        alt: "Two each of gray, white, and black shirts laying flat.",
+      },
+      {
+        type: "video",
+        src: "https://siestaofficiel.com/wp-content/uploads/2025/03/medico.jpg",
+        alt: "Product video demo",
+      },
+    ],
+    colors: [
+      { id: "white", name: "White", classes: "bg-white" },
+      { id: "gray", name: "Gray", classes: "bg-gray-300" },
+      { id: "black", name: "Black", classes: "bg-black" },
+    ],
+    sizes: [
+      { id: "80x190", name: "80x190", inStock: true },
+      { id: "90x190", name: "90x190", inStock: true },
+      { id: "100x190", name: "100x190", inStock: true },
+      { id: "110x190", name: "110x190", inStock: true },
+      { id: "120x190", name: "120x190", inStock: true },
+      { id: "140x190", name: "140x190", inStock: true },
+      { id: "150x190", name: "150x190", inStock: true },
+      { id: "160x190", name: "160x190", inStock: true },
+      { id: "170x190", name: "170x190", inStock: true },
+      { id: "180x190", name: "180x190", inStock: true },
+    ],
+  },
+  {
+    id: 6,
+    name: "Tendresse+ ( Matelas ergonomique )",
+    price: 595,
+    category: "tendresse",
+    description:
+      "Découvrez le *Matelas ergonomique Tendresse*:✓  Couche de mousse de densité 33,5kg/m3 côté mi-ferme✓  Couche de mousse de densité 35kg/m3 côté relaxante✓  Supporte jusqu'à 150kg par personne✓  Réversible : face été , face hiver✓  épaisseur 30cm✓  Tissu anti acarien et anti tâche✓  Retardateur de flamme✓  Ressorts ensachés =indépendance de couchage✓  11 ans de garantie✓  210 ressorts par m²",
+    details: "Extra plush top layer, cooling technology, orthopedic support.",
+    media: [
+      {
+        type: "image",
+        src: "https://siestaofficiel.com/wp-content/uploads/2025/05/tendressfacerelax.webp",
+        alt: "Two each of gray, white, and black shirts laying flat.",
+      },
+      {
+        type: "image",
+        src: "https://siestaofficiel.com/wp-content/uploads/2025/03/tendresse.jpg",
+        alt: "Two each of gray, white, and black shirts laying flat.",
+      },
+      {
+        type: "video",
+        src: "https://www.w3schools.com/html/mov_bbb.mp4",
+        alt: "Product video demo",
+      },
+    ],
+    colors: [
+      { id: "white", name: "White", classes: "bg-white" },
+      { id: "gray", name: "Gray", classes: "bg-gray-300" },
+      { id: "black", name: "Black", classes: "bg-black" },
+    ],
+    sizes: [
+      { id: "80x190", name: "80x190", inStock: true },
+      { id: "90x190", name: "90x190", inStock: true },
+      { id: "100x190", name: "100x190", inStock: true },
+      { id: "110x190", name: "110x190", inStock: true },
+      { id: "120x190", name: "120x190", inStock: true },
+      { id: "140x190", name: "140x190", inStock: true },
+      { id: "150x190", name: "150x190", inStock: true },
+      { id: "160x190", name: "160x190", inStock: true },
+      { id: "170x190", name: "170x190", inStock: true },
+      { id: "180x190", name: "180x190", inStock: true },
+    ],
+  },
+  {
+    id: 8,
+    name: "Relax+ ( Matelas ergonomique )",
+    price: 435,
+    category: "relax",
+    description:
+      "Découvrez le *Matelas ergonomique Relax+*:✓ Couche de mousse de densité 33kg/m3 côté mi-ferme✓ Couche de mousse de densité 35kg/m3 côté relaxante✓ Supporte jusqu'à 130kg par personne✓ Réversible : face été , face hiver✓ épaisseur 27cm✓ Tissu anti acarien✓ Retardateur de flamme✓ Ressorts ensachés=indépendance de couchage✓ 10 ans de garantie✓ 210 ressorts par m²",
+    details: "Breathable fabric, elastic edges, machine washable.",
+    media: [
+      {
+        type: "image",
+        src: "https://siestaofficiel.com/wp-content/uploads/2025/05/relaxface.webp",
+        alt: "Two each of gray, white, and black shirts laying flat.",
+      },
+      {
+        type: "image",
+        src: "https://siestaofficiel.com/wp-content/uploads/2025/03/rell.jpg",
+        alt: "Two each of gray, white, and black shirts laying flat.",
+      },
+      {
+        type: "video",
+        src: "https://www.w3schools.com/html/mov_bbb.mp4",
+        alt: "Product video demo",
+      },
+    ],
+    colors: [
+      { id: "white", name: "White", classes: "bg-white" },
+      { id: "gray", name: "Gray", classes: "bg-gray-300" },
+      { id: "black", name: "Black", classes: "bg-black" },
+    ],
+    sizes: [
+      { id: "80x190", name: "80x190", inStock: true },
+      { id: "90x190", name: "90x190", inStock: true },
+      { id: "100x190", name: "100x190", inStock: true },
+      { id: "110x190", name: "110x190", inStock: true },
+      { id: "120x190", name: "120x190", inStock: true },
+      { id: "140x190", name: "140x190", inStock: true },
+      { id: "150x190", name: "150x190", inStock: true },
+      { id: "160x190", name: "160x190", inStock: true },
+      { id: "170x190", name: "170x190", inStock: true },
+      { id: "180x190", name: "180x190", inStock: true },
+    ],
+  },
+  {
     id: 1,
     name: "Soft+ (Matelas orthopédique)",
     price: 600,
@@ -139,44 +263,7 @@ export const products = [
       { id: "180x190", name: "180x190", inStock: true },
     ],
   },
-  {
-    id: 4,
-    name: "Medico+ ( Matelas Ortho-Médical )",
-    price: 360,
-    category: "medico",
-    description:
-      "Découvrez le *matelas ortho médical Medico+*:✓ Couche de mousse de densité 28/30 côté ferme✓ Couche de mousse de densité 33kg/m3 côté relaxante✓ Supporte jusqu'à 110kg par personne✓ Réversible : face été , face hiver✓ épaisseur 25cm✓ Tissu anti acarien✓ Retardateur de flamme✓ Ressorts bonnells section 2,3 mm✓ 9 ans de garantie✓ 80 ressorts par m²",
-    details: "Extra-firm foam layers, washable cover, anti-mite treatment.",
-    media: [
-      {
-        type: "image",
-        src: "https://siestaofficiel.com/wp-content/uploads/2025/05/medicoface.webp",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        type: "video",
-        src: "https://siestaofficiel.com/wp-content/uploads/2025/03/medico.jpg",
-        alt: "Product video demo",
-      },
-    ],
-    colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
-    ],
-    sizes: [
-      { id: "80x190", name: "80x190", inStock: true },
-      { id: "90x190", name: "90x190", inStock: true },
-      { id: "100x190", name: "100x190", inStock: true },
-      { id: "110x190", name: "110x190", inStock: true },
-      { id: "120x190", name: "120x190", inStock: true },
-      { id: "140x190", name: "140x190", inStock: true },
-      { id: "150x190", name: "150x190", inStock: true },
-      { id: "160x190", name: "160x190", inStock: true },
-      { id: "170x190", name: "170x190", inStock: true },
-      { id: "180x190", name: "180x190", inStock: true },
-    ],
-  },
+
   {
     id: 5,
     name: "Medico Pillow (Matelas Ortho-Médical)",
@@ -220,49 +307,7 @@ export const products = [
       { id: "180x190", name: "180x190", inStock: true },
     ],
   },
-  {
-    id: 6,
-    name: "Tendresse+ ( Matelas ergonomique )",
-    price: 595,
-    category: "tendresse",
-    description:
-      "Découvrez le *Matelas ergonomique Tendresse*:✓  Couche de mousse de densité 33,5kg/m3 côté mi-ferme✓  Couche de mousse de densité 35kg/m3 côté relaxante✓  Supporte jusqu'à 150kg par personne✓  Réversible : face été , face hiver✓  épaisseur 30cm✓  Tissu anti acarien et anti tâche✓  Retardateur de flamme✓  Ressorts ensachés =indépendance de couchage✓  11 ans de garantie✓  210 ressorts par m²",
-    details: "Extra plush top layer, cooling technology, orthopedic support.",
-    media: [
-      {
-        type: "image",
-        src: "https://siestaofficiel.com/wp-content/uploads/2025/05/tendressfacerelax.webp",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        type: "image",
-        src: "https://siestaofficiel.com/wp-content/uploads/2025/03/tendresse.jpg",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        type: "video",
-        src: "https://www.w3schools.com/html/mov_bbb.mp4",
-        alt: "Product video demo",
-      },
-    ],
-    colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
-    ],
-    sizes: [
-      { id: "80x190", name: "80x190", inStock: true },
-      { id: "90x190", name: "90x190", inStock: true },
-      { id: "100x190", name: "100x190", inStock: true },
-      { id: "110x190", name: "110x190", inStock: true },
-      { id: "120x190", name: "120x190", inStock: true },
-      { id: "140x190", name: "140x190", inStock: true },
-      { id: "150x190", name: "150x190", inStock: true },
-      { id: "160x190", name: "160x190", inStock: true },
-      { id: "170x190", name: "170x190", inStock: true },
-      { id: "180x190", name: "180x190", inStock: true },
-    ],
-  },
+
   {
     id: 7,
     name: "Tendresse Pillow (Matelas ergonomique)",
@@ -306,49 +351,7 @@ export const products = [
       { id: "180x190", name: "180x190", inStock: true },
     ],
   },
-  {
-    id: 8,
-    name: "Relax+ ( Matelas ergonomique )",
-    price: 435,
-    category: "relax",
-    description:
-      "Découvrez le *Matelas ergonomique Relax+*:✓ Couche de mousse de densité 33kg/m3 côté mi-ferme✓ Couche de mousse de densité 35kg/m3 côté relaxante✓ Supporte jusqu'à 130kg par personne✓ Réversible : face été , face hiver✓ épaisseur 27cm✓ Tissu anti acarien✓ Retardateur de flamme✓ Ressorts ensachés=indépendance de couchage✓ 10 ans de garantie✓ 210 ressorts par m²",
-    details: "Breathable fabric, elastic edges, machine washable.",
-    media: [
-      {
-        type: "image",
-        src: "https://siestaofficiel.com/wp-content/uploads/2025/05/relaxface.webp",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        type: "image",
-        src: "https://siestaofficiel.com/wp-content/uploads/2025/03/rell.jpg",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        type: "video",
-        src: "https://www.w3schools.com/html/mov_bbb.mp4",
-        alt: "Product video demo",
-      },
-    ],
-    colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
-    ],
-    sizes: [
-      { id: "80x190", name: "80x190", inStock: true },
-      { id: "90x190", name: "90x190", inStock: true },
-      { id: "100x190", name: "100x190", inStock: true },
-      { id: "110x190", name: "110x190", inStock: true },
-      { id: "120x190", name: "120x190", inStock: true },
-      { id: "140x190", name: "140x190", inStock: true },
-      { id: "150x190", name: "150x190", inStock: true },
-      { id: "160x190", name: "160x190", inStock: true },
-      { id: "170x190", name: "170x190", inStock: true },
-      { id: "180x190", name: "180x190", inStock: true },
-    ],
-  },
+
   {
     id: 9,
     name: "Relax Pillow (Matelas ergonomique)",
