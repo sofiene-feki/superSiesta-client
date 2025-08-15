@@ -1,6 +1,6 @@
 // src/app/store.js
 import { configureStore } from "@reduxjs/toolkit";
-import viewSlice from "./ui/ViewSlice";
+import viewSlice from "./ui/viewSlice";
 import filterSlice from "./shopFilters/filtreSlice";
 import pageOptions from "./shopFilters/pageOptions";
 import cartSlice from "./cart/cartSlice";

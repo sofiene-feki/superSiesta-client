@@ -82,8 +82,8 @@ export default function NewArrivals() {
         className="shadow-xl  hover:shadow-2xl transition-shadow duration-300  border border-gray-200 bg-white"
         {...(isMobile ? mobileSettings : desktopSettings)}
       >
-        {products.map((product) => (
-          <div key={product.id} className="py-3 px-1 ">
+        {products.slice(0, 5).map((product) => (
+          <div key={product.id} className="py-3 px-1">
             <Product product={product} />
           </div>
         ))}

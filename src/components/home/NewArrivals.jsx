@@ -66,7 +66,7 @@ export default function NewArrivals() {
     rtl: false, // you had rtl: true, remove unless need
   };
   return (
-    <div className="mx-auto max-w-7xl  py-4 md:py-8 sm:px-6 sm:py-8">
+    <div className="mx-auto max-w-7xl md:mb-16 py-4 md:py-8 sm:px-6 sm:py-8">
       <div className="flex px-2 items-center justify-between mb-4">
         <h2 className="text-xl  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] md:text-2xl  md:px-0 font-bold tracking-tight text-gray-900">
           Dernières Nouveautés
@@ -80,8 +80,8 @@ export default function NewArrivals() {
         className="shadow-xl  hover:shadow-2xl transition-shadow duration-300 border border-gray-200 bg-white"
         {...(isMobile ? mobileSettings : desktopSettings)}
       >
-        {products.map((product) => (
-          <div key={product.id} className="py-3 px-1 ">
+        {products.slice(0, 5).map((product) => (
+          <div key={product.id} className="py-3 px-1">
             <Product product={product} />
           </div>
         ))}

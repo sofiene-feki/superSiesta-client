@@ -14,9 +14,9 @@ export default function Home() {
       <Banner />
       <BannerBottom />
       <div className="h-2 bg-gray-200 block md:hidden"></div>
-      <NewArrivals />
-      <div className="h-2 bg-gray-200 block md:hidden"></div>
       <Category />
+      <div className="h-2 bg-gray-200 block md:hidden"></div>
+      <NewArrivals />
       <div className="h-2 bg-gray-200 block md:hidden"></div>
       <SpecialOffer />
       <div className="h-2 bg-gray-200 block md:hidden"></div>

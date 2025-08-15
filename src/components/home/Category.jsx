@@ -160,7 +160,7 @@ export default function Category() {
   };
 
   return (
-    <section className="max-w-screen-xl md:mb-16 mb-0 mx-auto  sm:px-6 lg:px-8 pt-4 md:py-8">
+    <section className="max-w-screen-xl  mb-0 mx-auto  sm:px-6 lg:px-8 pt-4 md:py-8">
       {/* Header */}
       <header className="flex items-center px-2 md:px:0 justify-between mb-4">
         <h2 className="text-xl  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] md:text-2xl font-bold tracking-tight text-gray-900">
