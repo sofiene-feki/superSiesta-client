@@ -2,8 +2,8 @@ import React, { Fragment, useState } from "react";
 import {
   Dialog,
   Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
+  MenuItem,
+  MenuItems,
   Menu,
   MenuButton,
   Transition,
@@ -17,12 +17,17 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo_supersiesta.png";
 import { useDispatch, useSelector } from "react-redux";
 import { openCart } from "../../redux/ui/cartDrawer";
+import { signOut } from "firebase/auth";
+import { authLogout } from "../../redux/user/userSlice";
+import { auth } from "../../service/firebase";
+import userImg from "../../assets/user.jpg";
 
 const navigation = [
   { name: "Accueil", href: "/" },
   { name: "Produits", href: "/shop" },
   { name: "À propos", href: "/about" },
   { name: "Nous Contacter", href: "/contact" },
+  { name: "se connecter", href: "/login" },
 ];
 
 function classNames(...classes) {
@@ -36,7 +41,21 @@ export default function Header() {
   const dispatch = useDispatch();
   const [user, setUser] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const { userInfo, isAuthenticated } = useSelector((state) => state.user);
+  const userNavigation = [
+    { name: "Your Profile", href: "#" },
+    { name: "Settings", href: "#" },
+    { name: "Sign out", href: "#" },
+  ];
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth); // Firebase logout
+      dispatch(authLogout()); // Clear Redux state
+      navigate("/login"); // Redirect to login
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  };
   return (
     <nav className="bg-white sticky top-0 z-50 shadow-lg">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -89,7 +108,46 @@ export default function Header() {
           </nav>
 
           {/* Cart + User */}
-          <div className="flex items-center mt-2 p-3 md:hidden">
+          <div className="flex items-center gap-3 mt-2 p-3 md:hidden">
+            {isAuthenticated && userInfo && (
+              <Menu as="div" className="relative">
+                <Menu.Button className="flex items-center">
+                  <img
+                    className="w-9 h-9 rounded-full"
+                    src={userImg}
+                    alt="profile"
+                  />
+                </Menu.Button>
+
+                <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
+                  {userNavigation.map((item) => (
+                    <Menu.Item key={item.name}>
+                      {({ active }) =>
+                        item.name === "Sign out" ? (
+                          <button
+                            onClick={handleSignOut}
+                            className={`w-full text-left px-4 py-2 text-sm text-gray-700 ${
+                              active ? "bg-gray-100" : ""
+                            }`}
+                          >
+                            {item.name}
+                          </button>
+                        ) : (
+                          <Link
+                            to={item.href}
+                            className={`block px-4 py-2 text-sm text-gray-700 ${
+                              active ? "bg-gray-100" : ""
+                            }`}
+                          >
+                            {item.name}
+                          </Link>
+                        )
+                      }
+                    </Menu.Item>
+                  ))}
+                </Menu.Items>
+              </Menu>
+            )}
             <button
               onClick={() => dispatch(openCart())}
               className="relative text-[#2c2d84] transition md:hidden"

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import React from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+
 import About from "./pages/about";
 import Shop from "./pages/shop";
 import Header from "./components/header/Header";
@@ -16,15 +17,24 @@ import CheckoutPage from "./pages/checkout";
 import Footer from "./components/footer/Footer";
 import Category from "./pages/catrgory";
 import Contact from "./pages/contact";
+import Login from "./pages/login";
 
 function App() {
+  const location = useLocation();
+
+  // Pages where we DON'T want the header and headerBottom to show
+  const hideHeaderPaths = ["/login"];
+  const shouldShowHeader = !hideHeaderPaths.includes(location.pathname);
+
   return (
     <>
-      <Header />
-      <HeaderBottom />
+      {shouldShowHeader && <Header />}
+      {shouldShowHeader && <HeaderBottom />}
       <Cart />
+
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="shop" element={<Shop />} />
@@ -33,6 +43,7 @@ function App() {
         <Route path="/product/:name" element={<ProductDetails />} />
         <Route path="/*" element={"rawa7"} />
       </Routes>
+
       <Footer />
     </>
   );

@@ -9,12 +9,16 @@ import {
   ViewColumnsIcon,
 } from "@heroicons/react/24/outline";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import { openCart } from "../../redux/ui/cartDrawer";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { products } from "../../constants/products";
+import { auth } from "../../service/firebase";
+import { authLogout } from "../../redux/user/userSlice";
+import { signOut } from "firebase/auth";
+import userImg from "../../assets/user.jpg";
 
 export default function HeaderBottom() {
   const [query, setQuery] = useState("");
@@ -22,6 +26,7 @@ export default function HeaderBottom() {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const wrapperRef = useRef(null);
+  const { userInfo, isAuthenticated } = useSelector((state) => state.user);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -59,6 +64,17 @@ export default function HeaderBottom() {
   };
   const dispatch = useDispatch();
   const totalQty = useSelector((state) => state.cart.totalQuantity);
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth); // Firebase logout
+      dispatch(authLogout()); // Clear Redux state
+      navigate("/login"); // Redirect to login
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  };
 
   const user = {
     name: "Tom Cook",
@@ -244,31 +260,54 @@ export default function HeaderBottom() {
           </button>
 
           {/* Profile Dropdown */}
-          <Menu as="div" className="relative">
-            <MenuButton className="flex items-center">
-              <img
-                className="w-8 h-8 rounded-full"
-                src={user.imageUrl}
-                alt="profile"
-              />
-            </MenuButton>
-            <MenuItems className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
-              {userNavigation.map((item) => (
-                <MenuItem key={item.name}>
-                  {({ active }) => (
-                    <Link
-                      to={item.href}
-                      className={`block px-4 py-2 text-sm text-gray-700 ${
-                        active ? "bg-gray-100" : ""
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                </MenuItem>
-              ))}
-            </MenuItems>
-          </Menu>
+          <>
+            {isAuthenticated && userInfo ? (
+              <Menu as="div" className="relative">
+                <MenuButton className="flex items-center">
+                  <img
+                    className="w-8 h-8 rounded-full"
+                    src={userImg}
+                    alt="profile"
+                  />
+                </MenuButton>
+
+                <MenuItems className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
+                  {userNavigation.map((item) => (
+                    <MenuItem key={item.name}>
+                      {({ active }) =>
+                        item.name === "Sign out" ? (
+                          <button
+                            onClick={handleSignOut}
+                            className={`w-full text-left px-4 py-2 text-sm text-gray-700 ${
+                              active ? "bg-gray-100" : ""
+                            }`}
+                          >
+                            {item.name}
+                          </button>
+                        ) : (
+                          <Link
+                            to={item.href}
+                            className={`block px-4 py-2 text-sm text-gray-700 ${
+                              active ? "bg-gray-100" : ""
+                            }`}
+                          >
+                            {item.name}
+                          </Link>
+                        )
+                      }
+                    </MenuItem>
+                  ))}
+                </MenuItems>
+              </Menu>
+            ) : (
+              <Link
+                to="/login"
+                className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-500"
+              >
+                Login
+              </Link>
+            )}
+          </>
         </div>
       </div>
     </div>

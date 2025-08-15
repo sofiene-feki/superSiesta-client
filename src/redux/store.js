@@ -5,6 +5,7 @@ import filterSlice from "./shopFilters/filtreSlice";
 import pageOptions from "./shopFilters/pageOptions";
 import cartSlice from "./cart/cartSlice";
 import cartDrawer from "./ui/cartDrawer";
+import userSlice from "./user/userSlice";
 
 import {
   persistStore,
@@ -28,6 +29,13 @@ const cartPersistConfig = {
 
 const persistedCartReducer = persistReducer(cartPersistConfig, cartSlice);
 
+const userPersistConfig = {
+  key: "user",
+  storage,
+};
+
+const persistedUserReducer = persistReducer(userPersistConfig, userSlice);
+
 export const store = configureStore({
   reducer: {
     view: viewSlice,
@@ -35,6 +43,7 @@ export const store = configureStore({
     pageOptions: pageOptions,
     cart: persistedCartReducer, // use persisted reducer here
     cartDrawer: cartDrawer,
+    user: persistedUserReducer, // Assuming you have a user slice for authentication
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
