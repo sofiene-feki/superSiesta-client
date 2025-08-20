@@ -6,7 +6,7 @@ import { openCart } from "../../redux/ui/cartDrawer";
 import { addItem } from "../../redux/cart/cartSlice";
 import { useDispatch } from "react-redux";
 
-export default function Product({ product }) {
+export default function Product({ product, productsPerPage, loading }) {
   const view = useSelector((state) => state.view.view);
   const dispatch = useDispatch();
   // Get first image media for preview, fallback to placeholder if none
@@ -21,14 +21,16 @@ export default function Product({ product }) {
   const firstSize = product.sizes?.[0]?.name || "M";
 
   const handleAddToCart = () => {
+    console.log("Adding to cart:", imageSrc);
     dispatch(
       addItem({
-        productId: product.id,
-        name: product.name,
-        price: product.price,
+        productId: product._id,
+        name: product.Title,
+        price: firstSize?.price ?? product.Price,
         image: imageSrc,
-        selectedSize: firstSize,
-        selectedColor: firstColor,
+        selectedSize: firstSize?.name ?? null,
+        selectedSizePrice: firstSize?.price ?? null,
+        selectedColor: firstColor?.name ?? null,
         colors: product.colors,
         sizes: product.sizes,
       })
@@ -47,7 +49,7 @@ export default function Product({ product }) {
         <div className="flex flex-col justify-between">
           <div>
             <h3 className="text-lg font-semibold text-gray-900">
-              <Link to={`/product/${product.name}`}>{product.name}</Link>
+              <Link to={`/product/${product.Title}`}>{product.Title}</Link>
             </h3>
             <p className="text-sm text-gray-500">{firstColor}</p>
           </div>
@@ -59,44 +61,62 @@ export default function Product({ product }) {
 
   // Default grid view
   return (
-    <div className="group relative border border-gray-200 rounded-md cursor-pointer">
-      <Link to={`/product/${product.name}`}>
-        {/* Image Wrapper (no padding) */}
-        <div className="aspect-square w-full rounded-t-md bg-gray-200 overflow-hidden">
-          <img
-            alt={imageAlt}
-            src={imageSrc}
-            className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-          />
-        </div>
+    <div>
+      {loading ? (
+        <div className="group relative pt-2 border border-gray-50 rounded-md cursor-pointer animate-pulse">
+          {/* Image Skeleton */}
+          <div className="aspect-square w-full rounded-t-md bg-gray-100" />
 
-        {/* Product Info + Button Wrapper (with padding) */}
-        <div className="p-2 bg-white">
-          {/* Product Info */}
-          <div className="mt-2 flex justify-between">
-            <h3 className="text-md font-medium text-gray-700 group-hover:text-[#87a736] transition-colors duration-300">
-              {product.name.length > 25
-                ? product.name.slice(0, 25) + "..."
-                : product.name}
-            </h3>
+          {/* Info Skeleton */}
+          <div className="p-2 bg-white">
+            <div className="mt-2 flex justify-between">
+              <div className="h-5 w-3/4 bg-gray-100 rounded"></div>
+              <div className="h-5 w-1/4 bg-gray-100 rounded"></div>
+            </div>
 
-            <p className="text-md font-medium text-gray-900 group-hover:text-[#87a736] transition-colors duration-300">
-              {product.price}
-            </p>
+            {/* Button Skeleton */}
+            <div className="mt-2 h-10 w-full bg-gray-100 rounded-lg"></div>
           </div>
-
-          {/* Add to Cart Button */}
-          <button
-            onClick={handleAddToCart}
-            className="flex items-center justify-center gap-2 w-full px-2 py-2 mt-4
-        bg-[#87a736] text-white font-semibold rounded-lg shadow-sm 
-        hover:bg-[#87a736] hover:text-white transition duration-300 ease-in-out"
-          >
-            <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-            Ajouter au panier
-          </button>
         </div>
-      </Link>
+      ) : (
+        <div className="group relative border border-gray-200 rounded-md cursor-pointer">
+          <Link to={`/product/${product.slug}`}>
+            {/* Image Wrapper */}
+            <div className="aspect-square w-full rounded-t-md bg-gray-200 overflow-hidden">
+              <img
+                alt={imageAlt}
+                src={imageSrc}
+                className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+              />
+            </div>
+          </Link>
+
+          {/* Product Info + Button */}
+          <div className="p-2 bg-white">
+            <div className="mt-2 flex justify-between">
+              <h3
+                className="text-md font-medium text-gray-700 group-hover:text-[#87a736] transition-colors duration-300 
+                truncate whitespace-nowrap overflow-hidden"
+              >
+                {product.Title}
+              </h3>
+              <p className="text-md font-medium text-gray-900 group-hover:text-[#87a736] transition-colors duration-300">
+                {product.Price}
+              </p>
+            </div>
+
+            <button
+              onClick={handleAddToCart}
+              className="flex items-center justify-center gap-2 w-full px-2 py-2 mt-4
+          bg-[#87a736] text-white font-semibold rounded-lg shadow-sm 
+          hover:bg-[#87a736] hover:text-white transition duration-300 ease-in-out"
+            >
+              <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+              Ajouter au panier
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

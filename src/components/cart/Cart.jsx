@@ -144,8 +144,8 @@ export default function CartDrawer() {
                                       >
                                         {item.colors.map((color) => (
                                           <option
-                                            key={color.id}
-                                            value={color.id}
+                                            key={color._id}
+                                            value={color.name}
                                           >
                                             {color.name}
                                           </option>
@@ -174,7 +174,10 @@ export default function CartDrawer() {
                                         }
                                       >
                                         {item.sizes.map((size) => (
-                                          <option key={size.id} value={size.id}>
+                                          <option
+                                            key={size._id}
+                                            value={size.name}
+                                          >
                                             {size.name}
                                           </option>
                                         ))}

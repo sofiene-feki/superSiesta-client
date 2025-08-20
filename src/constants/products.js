@@ -17,16 +17,11 @@ export const products = [
         src: "https://siestaofficiel.com/wp-content/uploads/2025/05/medicoface.webp",
         alt: "Two each of gray, white, and black shirts laying flat.",
       },
-      {
-        type: "video",
-        src: "https://siestaofficiel.com/wp-content/uploads/2025/03/medico.jpg",
-        alt: "Product video demo",
-      },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", inStock: true },
@@ -67,9 +62,9 @@ export const products = [
       },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", inStock: true },
@@ -110,9 +105,9 @@ export const products = [
       },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", inStock: true },
@@ -154,9 +149,9 @@ export const products = [
       },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", price: 20, inStock: true },
@@ -202,9 +197,9 @@ export const products = [
       },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", inStock: true },
@@ -246,9 +241,9 @@ export const products = [
       },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", inStock: true },
@@ -290,9 +285,9 @@ export const products = [
       },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", inStock: true },
@@ -334,9 +329,9 @@ export const products = [
       },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", inStock: true },
@@ -378,9 +373,9 @@ export const products = [
       },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", inStock: true },
@@ -421,9 +416,36 @@ export const products = [
       },
     ],
     colors: [
-      { id: "white", name: "White", classes: "bg-white" },
-      { id: "gray", name: "Gray", classes: "bg-gray-300" },
-      { id: "black", name: "Black", classes: "bg-black" },
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
+    ],
+    sizes: [
+      { id: "80x190", name: "80x190", inStock: true },
+      { id: "90x190", name: "90x190", inStock: true },
+      { id: "100x190", name: "100x190", inStock: true },
+      { id: "110x190", name: "110x190", inStock: true },
+      { id: "120x190", name: "120x190", inStock: true },
+      { id: "140x190", name: "140x190", inStock: true },
+      { id: "150x190", name: "150x190", inStock: true },
+      { id: "160x190", name: "160x190", inStock: true },
+      { id: "170x190", name: "170x190", inStock: true },
+      { id: "180x190", name: "180x190", inStock: true },
+    ],
+  },
+  {
+    id: 11,
+    name: "Top Relax (Matelas Viscoélastssaique)",
+    price: 885,
+    category: "topRelax",
+    description:
+      "✓ Matelas viscoélastique✓ Spécial anti mal de dos✓ Compressé et enroulé✓ 15 cm en mousse HR et 6cm en mousse à mémoire de densité 45kg/m3✓ Tissu anti acarien et anti allergique (cotton 100%)✓ Déhoussable et lavable à 30°✓ Silencieux✓ Indépendance de couchage✓ 10 ans de garantie",
+    details: "Breathable fabric, elastic edges, machine washable.",
+
+    colors: [
+      { id: "white", name: "White", value: "white" },
+      { id: "gray", name: "Gray", value: "gray" },
+      { id: "black", name: "Black", value: "black" },
     ],
     sizes: [
       { id: "80x190", name: "80x190", inStock: true },

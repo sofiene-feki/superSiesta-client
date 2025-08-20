@@ -38,9 +38,9 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="shop" element={<Shop />} />
-        <Route path="category/:category" element={<Category />} />
+        <Route path="category/:Category" element={<Category />} />
         <Route path="Checkout" element={<CheckoutPage />} />
-        <Route path="/product/:name" element={<ProductDetails />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/*" element={"rawa7"} />
       </Routes>
 

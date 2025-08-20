@@ -19,10 +19,32 @@ import { auth } from "../../service/firebase";
 import { authLogout } from "../../redux/user/userSlice";
 import { signOut } from "firebase/auth";
 import userImg from "../../assets/user.jpg";
+import { searchProducts } from "../../functions/product";
 
 export default function HeaderBottom() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = async () => {
+    if (!query) return setResults([]);
+    setLoading(true);
+    try {
+      const { data } = await searchProducts({ query });
+      setResults(data.products);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Optional: trigger search on typing with debounce
+  useEffect(() => {
+    const timeout = setTimeout(() => handleSearch(), 300);
+    return () => clearTimeout(timeout);
+  }, [query]);
+
   const [showDropdown, setShowDropdown] = useState(false);
 
   const wrapperRef = useRef(null);
@@ -41,20 +63,20 @@ export default function HeaderBottom() {
     };
   }, []);
 
-  useEffect(() => {
-    if (query.trim() === "") {
-      setResults([]);
-      setShowDropdown(false);
-      return;
-    }
+  // useEffect(() => {
+  //   if (query.trim() === "") {
+  //     setResults([]);
+  //     setShowDropdown(false);
+  //     return;
+  //   }
 
-    // Filter products based on query (you can replace this with API call)
-    const filtered = products.filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setResults(filtered);
-    setShowDropdown(filtered.length > 0);
-  }, [query, products]);
+  //   // Filter products based on query (you can replace this with API call)
+  //   const filtered = products.filter((product) =>
+  //     product.name.toLowerCase().includes(query.toLowerCase())
+  //   );
+  //   setResults(filtered);
+  //   setShowDropdown(filtered.length > 0);
+  // }, [query, products]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -211,23 +233,23 @@ export default function HeaderBottom() {
 
                 return (
                   <Link
-                    to={`/product/${product.name}`}
-                    key={product.id}
+                    to={`/product/${product.slug}`}
+                    key={product._id}
                     className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 transition"
                     onClick={() => setShowDropdown(false)}
                   >
                     <img
                       src={imageSrc}
-                      alt={imageMedia?.alt || product.title}
+                      alt={imageMedia?.alt || product.Title}
                       className="w-12 h-12 object-cover rounded"
                     />
                     <div className="flex flex-col">
                       <span className="text-sm font-medium text-gray-900">
-                        {product.name}
+                        {product.Title}
                       </span>
                       {product.price && (
                         <span className="text-sm text-gray-500">
-                          {product.price} DT
+                          {product.Price} DT
                         </span>
                       )}
                     </div>

@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import medico from "../../assets/category/medicop.jpg";
 import eco from "../../assets/eco+.png";
+import { useSelector } from "react-redux";
+import {
+  getAllProductTitles,
+  getProductBySlug,
+  getProductOfTheYear,
+  setProductOfTheYear,
+} from "../../functions/product";
 
 export default function SpecialOfferCard() {
   const [timeLeft, setTimeLeft] = useState({
@@ -10,6 +17,7 @@ export default function SpecialOfferCard() {
     minutes: 0,
     seconds: 0,
   });
+  const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
     function updateCountdown() {
@@ -35,11 +43,64 @@ export default function SpecialOfferCard() {
     return () => clearInterval(timerId);
   }, []);
 
+  const [titles, setTitles] = useState([]);
+  const [selectedSlug, setSelectedSlug] = useState("");
+  const [product, setProduct] = useState(null);
+
+  // fetch product titles on mount
+  useEffect(() => {
+    const fetchTitles = async () => {
+      try {
+        const res = await getAllProductTitles();
+        setTitles(res);
+      } catch (err) {
+        console.error("❌ Error fetching titles:", err);
+      }
+    };
+    fetchTitles();
+  }, []);
+
+  useEffect(() => {
+    const fetchProductOfTheYear = async () => {
+      try {
+        const prod = await getProductOfTheYear();
+        setProduct(prod);
+        setSelectedSlug(prod.slug); // set default selected
+      } catch (error) {
+        console.log("⚠️ No product of the year set yet.");
+      }
+    };
+    fetchProductOfTheYear();
+  }, []);
+
+  const handleSelect = async (slug) => {
+    try {
+      setSelectedSlug(slug);
+
+      // get product details
+      const productDetails = await getProductBySlug(slug);
+      setProduct(productDetails);
+
+      // set as product of the year
+      await setProductOfTheYear(slug);
+    } catch (err) {
+      console.error("❌ Error handling product selection:", err);
+    }
+  };
+
+  const originalPrice = product?.Price;
+  const promotion = product?.promotion || 0; // percentage
+  const discountedPrice = +(
+    originalPrice -
+    (originalPrice * promotion) / 100
+  ).toFixed(2);
+  const savings = +(originalPrice - discountedPrice).toFixed(2);
+
   return (
     <div className="max-w-7xl h-auto mx-auto bg-white border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row hover:shadow-2xl transition-shadow duration-300 relative">
       {/* Discount Ribbon */}
       <div className="absolute top-4 left-4 bg-red-500 text-white text-xs md:text-sm font-bold py-1 px-3 rounded-tr-lg rounded-bl-lg shadow-lg z-10">
-        -20%
+        {promotion}%
       </div>
 
       {/* Left Image Section */}
@@ -73,7 +134,7 @@ export default function SpecialOfferCard() {
               <div className="flex items-end gap-2">
                 <div className="relative flex items-start">
                   <h3 className="text-2xl md:text-4xl font-bold text-[#87a736] leading-none">
-                    220
+                    {discountedPrice}{" "}
                   </h3>
                   <span className="absolute -top-1 right-0 translate-x-full text-sm font-semibold text-gray-700">
                     DT
@@ -81,10 +142,10 @@ export default function SpecialOfferCard() {
                 </div>
 
                 <span className="line-through text-gray-400 text-sm md:ml-0 ml-3 mt-1">
-                  250
+                  {originalPrice}{" "}
                 </span>
                 <span className="text-xs text-red-500 font-semibold">
-                  Économisez 30 DT
+                  Économisez {savings} DT
                 </span>
               </div>
             </div>
@@ -104,11 +165,11 @@ export default function SpecialOfferCard() {
 
           {/* Product Name */}
           <h3 className="text-lg md:text-xl font-semibold text-gray-800">
-            Soft+ (Matelas orthopédique)
+            {product?.Title}{" "}
           </h3>
 
           {/* Features */}
-          <ul className="space-y-2 text-gray-700 text-sm md:text-base">
+          {/* <ul className="space-y-2 text-gray-700 text-sm md:text-base">
             {[
               "Deux couches de mousse densité 20/22",
               "Jusqu’à 80kg par personne",
@@ -132,17 +193,39 @@ export default function SpecialOfferCard() {
                 {feature}
               </li>
             ))}
-          </ul>
+          </ul> */}
+          <p className="space-y-2 text-gray-700 text-sm md:text-base">
+            {product?.Description}
+          </p>
         </div>
 
         {/* CTA */}
-        <button
-          className="flex items-center justify-center gap-3 px-6 py-2 text-white text-lg font-bold rounded-xl shadow-lg bg-gradient-to-r from-[#87a736] via-green-500 to-[#87a736] bg-[length:200%_200%] animate-gradientMove hover:scale-105 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 focus:ring-4 focus:ring-green-300"
-          aria-label="Acheter Medico Pillow"
-        >
-          <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-          Acheter Maintenant
-        </button>
+        {user ? (
+          <select
+            onChange={(e) => handleSelect(e.target.value)}
+            value={selectedSlug}
+            className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm placeholder-gray-400
+             focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none
+             transition mb-4"
+          >
+            <option value="">-- Choose a product --</option>
+            {titles.map((item) => (
+              <option key={item.slug} value={item.slug}>
+                {item.Title}
+              </option>
+            ))}
+
+            {/* Add more categories as needed */}
+          </select>
+        ) : (
+          <button
+            className="flex items-center justify-center gap-3 px-6 py-2 text-white text-lg font-bold rounded-xl shadow-lg bg-gradient-to-r from-[#87a736] via-green-500 to-[#87a736] bg-[length:200%_200%] animate-gradientMove hover:scale-105 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 focus:ring-4 focus:ring-green-300"
+            aria-label="Acheter Medico Pillow"
+          >
+            <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+            Acheter Maintenant
+          </button>
+        )}
       </div>
     </div>
   );
