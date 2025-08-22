@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-
 import medico from "../../assets/category/medico.png";
 import relax from "../../assets/category/relax.png";
 import soft from "../../assets/category/soft.png";
@@ -12,6 +11,7 @@ import venise from "../../assets/category/venise.png";
 import topRelax from "../../assets/category/topRelax.png";
 import oreiller from "../../assets/category/oreiller.webp";
 import protege from "../../assets/category/protege.webp";
+import { NextArrow, PrevArrow } from "../ui";
 
 const categories = [
   {
@@ -73,31 +73,6 @@ const categories = [
 ];
 
 // ✅ Arrows
-function NextArrow({ onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className="absolute shadow-2xl top-1/2 -right-10 -translate-y-1/2 z-10 
-                 bg-white h-30 w-10  shadow-lg 
-                 hover:bg-gray-100 transition flex items-center justify-center"
-    >
-      <ChevronRightIcon className="w-6 h-6 text-gray-700" />
-    </button>
-  );
-}
-
-function PrevArrow({ onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className="absolute shadow-2xl top-1/2 -left-10 -translate-y-1/2 z-10 
-                 bg-white h-30 w-10  shadow-lg 
-                 hover:bg-gray-100 transition flex items-center justify-center"
-    >
-      <ChevronLeftIcon className="w-6 h-6 text-gray-700" />
-    </button>
-  );
-}
 
 function MobileNextArrow({ onClick }) {
   return (

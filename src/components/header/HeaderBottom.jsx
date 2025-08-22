@@ -27,19 +27,25 @@ export default function HeaderBottom() {
   const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
-    if (!query) return setResults([]);
+    if (!query.trim()) {
+      setResults([]);
+      setShowDropdown(false);
+      return;
+    }
     setLoading(true);
+    setShowDropdown(true); // show dropdown as soon as search starts
     try {
       const { data } = await searchProducts({ query });
       setResults(data.products);
     } catch (err) {
       console.error(err);
+      setResults([]); // clear results on error
     } finally {
       setLoading(false);
     }
   };
 
-  // Optional: trigger search on typing with debounce
+  // Debounce search on typing
   useEffect(() => {
     const timeout = setTimeout(() => handleSearch(), 300);
     return () => clearTimeout(timeout);
@@ -107,7 +113,7 @@ export default function HeaderBottom() {
 
   const userNavigation = [
     { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
+    { name: "Mes commandes", href: "orders" },
     { name: "Sign out", href: "#" },
   ];
 
@@ -220,42 +226,72 @@ export default function HeaderBottom() {
           </form>
 
           {/* Dropdown */}
+          {/* Dropdown */}
           {showDropdown && (
             <div className="absolute top-full left-0 w-full bg-white shadow-lg rounded-md mt-1 max-h-64 overflow-y-auto z-50">
-              {results.map((product) => {
-                // Find the first image in the media array
-                const imageMedia = product.media.find(
-                  (m) => m.type === "image"
-                );
-                const imageSrc = imageMedia
-                  ? imageMedia.src
-                  : "/placeholder.png"; // fallback if no image
-
-                return (
-                  <Link
-                    to={`/product/${product.slug}`}
-                    key={product._id}
-                    className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 transition"
-                    onClick={() => setShowDropdown(false)}
+              {loading ? (
+                // Loading Spinner
+                <div className="flex justify-center items-center py-4">
+                  <svg
+                    className="animate-spin h-5 w-5 text-gray-600"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
                   >
-                    <img
-                      src={imageSrc}
-                      alt={imageMedia?.alt || product.Title}
-                      className="w-12 h-12 object-cover rounded"
-                    />
-                    <div className="flex flex-col">
-                      <span className="text-sm font-medium text-gray-900">
-                        {product.Title}
-                      </span>
-                      {product.price && (
-                        <span className="text-sm text-gray-500">
-                          {product.Price} DT
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8H4z"
+                    ></path>
+                  </svg>
+                </div>
+              ) : results.length > 0 ? (
+                results.map((product) => {
+                  const imageMedia = product.media.find(
+                    (m) => m.type === "image"
+                  );
+                  const imageSrc = imageMedia
+                    ? imageMedia.src
+                    : "/placeholder.png";
+
+                  return (
+                    <Link
+                      to={`/product/${product.slug}`}
+                      key={product._id}
+                      className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 transition"
+                      onClick={() => setShowDropdown(false)}
+                    >
+                      <img
+                        src={imageSrc}
+                        alt={imageMedia?.alt || product.Title}
+                        className="w-12 h-12 object-cover rounded"
+                      />
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium text-gray-900">
+                          {product.Title}
                         </span>
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
+                        {product.Price && (
+                          <span className="text-sm text-gray-500">
+                            {product.Price} DT
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  );
+                })
+              ) : (
+                <div className="px-3 py-2 text-gray-500 text-sm">
+                  Aucun résultat trouvé
+                </div>
+              )}
             </div>
           )}
         </div>

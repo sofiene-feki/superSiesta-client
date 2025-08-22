@@ -2,33 +2,9 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { getNewArrivals } from "../../functions/product"; // API call
 import Product from "../product/Product";
-
-function NextArrow({ onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className="absolute shadow-2xl top-1/2 -right-10 -translate-y-1/2 z-10 
-                 bg-white h-10 w-10 shadow-lg hover:bg-gray-100 transition flex items-center justify-center"
-    >
-      <ChevronRightIcon className="w-6 h-6 text-gray-700" />
-    </button>
-  );
-}
-
-function PrevArrow({ onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className="absolute shadow-2xl top-1/2 -left-10 -translate-y-1/2 z-10 
-                 bg-white h-10 w-10 shadow-lg hover:bg-gray-100 transition flex items-center justify-center"
-    >
-      <ChevronLeftIcon className="w-6 h-6 text-gray-700" />
-    </button>
-  );
-}
+import { LoadingProduct, NextArrow, PrevArrow } from "../ui";
 
 export default function NewArrivals() {
   const [products, setProducts] = useState([]);
@@ -115,23 +91,7 @@ export default function NewArrivals() {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Array.from({ length: 4 }).map((_, idx) => (
-            <div
-              key={idx}
-              className="border border-gray-200 rounded-md cursor-pointer animate-pulse"
-            >
-              <div className="aspect-square w-full rounded-t-md bg-gray-200" />
-              <div className="p-2 bg-white">
-                <div className="mt-2 flex justify-between">
-                  <div className="h-5 w-3/4 bg-gray-300 rounded"></div>
-                  <div className="h-5 w-1/4 bg-gray-300 rounded"></div>
-                </div>
-                <div className="mt-4 h-10 w-full bg-gray-300 rounded-lg"></div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <LoadingProduct length={isMobile ? 1 : 4} cols={4} />
       ) : (
         <Slider {...(isMobile ? mobileSettings : desktopSettings)}>
           {products.map((product) => (

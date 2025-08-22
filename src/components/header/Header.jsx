@@ -44,20 +44,20 @@ export default function Header() {
   const { userInfo, isAuthenticated } = useSelector((state) => state.user);
   const userNavigation = [
     { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
+    { name: "Mes commandes", href: "orders" },
     { name: "Sign out", href: "#" },
   ];
   const handleSignOut = async () => {
     try {
       await signOut(auth); // Firebase logout
       dispatch(authLogout()); // Clear Redux state
-      navigate("/login"); // Redirect to login
+      //  navigate("/login"); // Redirect to login
     } catch (err) {
       console.error("Logout error:", err);
     }
   };
   return (
-    <nav className="bg-white sticky top-0 z-50 shadow-lg">
+    <nav className="bg-white sticky top-0 z-60 shadow-lg">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="flex h-14.5 items-center justify-between">
           {/* Mobile: Menu button + Logo */}
@@ -110,18 +110,18 @@ export default function Header() {
           {/* Cart + User */}
           <div className="flex items-center gap-3 mt-2 p-3 md:hidden">
             {isAuthenticated && userInfo && (
-              <Menu as="div" className="relative">
-                <Menu.Button className="flex items-center">
+              <Menu as="div" className="relative ">
+                <MenuButton className="flex items-center">
                   <img
                     className="w-9 h-9 rounded-full"
                     src={userImg}
                     alt="profile"
                   />
-                </Menu.Button>
+                </MenuButton>
 
-                <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
+                <MenuItems className="absolute  -right-15 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
                   {userNavigation.map((item) => (
-                    <Menu.Item key={item.name}>
+                    <MenuItems key={item.name}>
                       {({ active }) =>
                         item.name === "Sign out" ? (
                           <button
@@ -143,9 +143,9 @@ export default function Header() {
                           </Link>
                         )
                       }
-                    </Menu.Item>
+                    </MenuItems>
                   ))}
-                </Menu.Items>
+                </MenuItems>
               </Menu>
             )}
             <button

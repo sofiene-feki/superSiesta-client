@@ -14,6 +14,7 @@ import Header from "../components/shop/header";
 import Product from "../components/product/Product";
 import Pagination from "../components/shop/Pagination";
 import { getProducts } from "../functions/product";
+import { LoadingProduct } from "../components/ui";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
@@ -108,8 +109,6 @@ export default function Shop() {
   return (
     <div>
       <div>
-        {/* Mobile filter dialog */}
-
         <main className="mx-auto max-w-7xl  px-4 sm:px-6 lg:px-8">
           <Header
             setMobileFiltersOpen={setMobileFiltersOpen}
@@ -130,34 +129,44 @@ export default function Shop() {
               />
 
               {/* Product grid */}
-              <div className="lg:col-span-3">
-                <div
-                  className={
-                    view === "list"
-                      ? " flex flex-col space-y-4"
-                      : " grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 xl:gap-x-8"
-                  }
-                >
-                  {products?.map((product) => (
-                    <Product
-                      key={product._id}
-                      product={product}
-                      loading={loading}
-                      productsPerPage={productsPerPage}
-                    />
-                  ))}
-                </div>{" "}
-                <div className="flex justify-between items-center mt-8">
-                  <Pagination
-                    currentPage={currentPage}
-                    pageCount={totalPages}
-                    onPageChange={handlePageChange}
-                  />
-                  <p className="text-gray-500 mt-8">
-                    {start} à {end} sur {totalProducts} produits
-                  </p>
+              {loading ? (
+                <div className="lg:col-span-3">
+                  {" "}
+                  <LoadingProduct length={9} cols={3} />
                 </div>
-              </div>
+              ) : (
+                <>
+                  {" "}
+                  <div className="lg:col-span-3">
+                    <div
+                      className={
+                        view === "list"
+                          ? " flex flex-col space-y-4"
+                          : " grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 xl:gap-x-8"
+                      }
+                    >
+                      {products?.map((product) => (
+                        <Product
+                          key={product._id}
+                          product={product}
+                          loading={loading}
+                          productsPerPage={productsPerPage}
+                        />
+                      ))}
+                    </div>{" "}
+                    <div className="flex justify-between items-center mt-8">
+                      <Pagination
+                        currentPage={currentPage}
+                        pageCount={totalPages}
+                        onPageChange={handlePageChange}
+                      />
+                      <p className="text-gray-500 mt-8">
+                        {start} à {end} sur {totalProducts} produits
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </section>
         </main>

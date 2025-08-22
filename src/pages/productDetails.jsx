@@ -21,6 +21,8 @@ import {
   removeProduct,
   updateProduct,
 } from "../functions/product";
+import { FormatDescription } from "../components/ui"; // Assuming you have this utility function
+import { FaShippingFast } from "react-icons/fa";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -70,6 +72,8 @@ export default function ProductDetails() {
   };
 
   useEffect(() => {
+    setLoading(true);
+
     const fetchProduct = async () => {
       try {
         if (!isCreate) {
@@ -100,9 +104,6 @@ export default function ProductDetails() {
       setSelectedSize(product?.sizes?.[0] || null);
     }
   }, [product]);
-
-  if (loading) return <p>Chargement...</p>;
-  if (!product) return <p>Produit non trouvé</p>;
 
   const handleAddToCart = () => {
     dispatch(
@@ -156,16 +157,6 @@ export default function ProductDetails() {
     }));
     console.log(`Updated `, product);
   };
-
-  function formatDescription(text) {
-    return (
-      text
-        // 1️⃣ Add newline before ✓ (except if it's the first char)
-        .replace(/(?!^)\s*✓/g, "\n✓")
-        // 2️⃣ Bold text between *...*
-        .replace(/\*(.*?)\*/g, "<strong>$1</strong>")
-    );
-  }
 
   const handleSubmit = async () => {
     try {
@@ -335,10 +326,18 @@ export default function ProductDetails() {
     navigate("/shop"); // redirect to shop page
   };
 
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("fr-TN", {
+      style: "currency",
+      currency: "TND",
+      minimumFractionDigits: 3,
+    }).format(price);
+  };
+
   return (
     <div className="py-4 md:py-10 px-4 sm:px-6 lg:px-8">
       {user && (
-        <div className="flex max-w-7xl mx-auto items-center justify-between border-b border-gray-200 pb-4 mb-6">
+        <div className="flex  bg-white max-w-7xl mx-auto items-center justify-between border-b border-gray-200 pb-4 mb-6">
           {/* Center title */}
           <h1 className="md:text-xl text-base font-semibold text-gray-800">
             {isCreate ? "Créer un produit" : isEdit ? "Modifier produit" : ""}
@@ -411,17 +410,21 @@ export default function ProductDetails() {
       )}
       <div className="max-w-7xl mx-auto lg:flex lg:gap-12">
         {/* LEFT: Media gallery */}
-        <ProductMediaGallery
-          media={product?.media} // pass media array directly
-          selectedMedia={selectedMedia} // currently selected
-          onSelectMedia={setSelectedMedia} // when clicking thumbnail
-          onAddMedia={handleFileUpload} // upload handler
-          onDeleteMedia={deleteMedia} // delete handler
-          isEditable={isEdit || isCreate} // edit/create flag
-        />
+        {loading ? (
+          <div className=" w-full h-[400px] lg:w-1/2 md:mb-6  lg:mb-0 bg-gray-200 rounded-lg animate-pulse"></div>
+        ) : (
+          <ProductMediaGallery
+            media={product?.media} // pass media array directly
+            selectedMedia={selectedMedia} // currently selected
+            onSelectMedia={setSelectedMedia} // when clicking thumbnail
+            onAddMedia={handleFileUpload} // upload handler
+            onDeleteMedia={deleteMedia} // delete handler
+            isEditable={isEdit || isCreate} // edit/create flag
+          />
+        )}
 
         {/* RIGHT: Product Info */}
-        <div className="w-full lg:w-1/2 mt-10 lg:mt-0">
+        <div className="w-full lg:w-1/2 mt-4 lg:mt-0">
           {/* Name, Price, Description */}
           {isEdit || isCreate ? (
             <>
@@ -429,34 +432,71 @@ export default function ProductDetails() {
             </>
           ) : (
             <>
-              <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl mb-2">
-                {product.Title}
-              </h1>
-              <p className="text-3xl text-gray-900 mb-6">
-                {selectedSize?.price ?? product.Price} DT
-              </p>
-              <div className="mb-6">
+              {loading ? (
+                <div className=" h-8 mb-2 w-3/4 bg-gray-200 rounded-lg animate-pulse"></div>
+              ) : (
+                <h1 className="text-2xl  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)] font-bold text-gray-900 sm:text-3xl mb-2">
+                  {product.Title}
+                </h1>
+              )}
+
+              {loading ? (
+                <div className=" h-8 mb-2 w-1/4 bg-gray-200 rounded-lg animate-pulse"></div>
+              ) : (
+                <p className="text-3xl md:flex border-b border-gray-200 pb-4 justify-between font-bold break-words bg-clip-text drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)] text-gray-900 mb-3">
+                  <span>
+                    {formatPrice(selectedSize?.price ?? product.Price)}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    {product.Quantity > 0 ? (
+                      <span className="text-green-600 text-xs font-semibold">
+                        En stock
+                      </span>
+                    ) : (
+                      <span className="text-red-500 text-xs line-through">
+                        Rupture de stock
+                      </span>
+                    )}
+                    <FaShippingFast className="text-[#2c2d84] md:w-6 md:h-6 w-5 h-5 ml-3" />
+                    <span className="text-xs text-[#2c2d84]">
+                      Livraison rapide
+                    </span>
+                  </span>
+                </p>
+              )}
+
+              <div className="mb-4">
                 {" "}
-                <h3 className="font-semibold">Description</h3>
-                <p
-                  className="mt-2 text-base text-gray-700 whitespace-pre-line"
-                  dangerouslySetInnerHTML={{
-                    __html: formatDescription(product.Description),
-                  }}
-                />
+                <h3 className="font-semibold  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+                  Description :
+                </h3>
+                {loading ? (
+                  <div className=" h-16 md:h-24 mb-2  w-full bg-gray-200 rounded-lg animate-pulse"></div>
+                ) : (
+                  <p
+                    className=" text-[16px] text-gray-500 whitespace-pre-line"
+                    dangerouslySetInnerHTML={{
+                      __html: FormatDescription(product.Description),
+                    }}
+                  />
+                )}
               </div>
             </>
           )}
 
           {/* Sizes */}
-          <div className="mb-2">
-            <h3 className="font-semibold text-gray-800 mb-1">Sizes & Prices</h3>
+          <div className="mb-4">
+            <h3 className="font-semibold  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]  mb-1">
+              Sizes & Prices
+            </h3>
             {isEdit || isCreate ? (
               <ProductSizesEditor
                 product={product}
                 setProduct={setProduct}
                 handleChangeProduct={handleChangeProduct}
               />
+            ) : loading ? (
+              <div className="h-16 w-full bg-gray-200 rounded-lg animate-pulse"></div>
             ) : (
               <div className="grid md:grid-cols-4 grid-cols-3 gap-2 mt-2">
                 {product.sizes.map((s, i) => (
@@ -479,13 +519,17 @@ export default function ProductDetails() {
 
           {/* Colors */}
           <div className="mb-6">
-            <h3 className="font-semibold mb-1">Colors</h3>
+            <h3 className="font-semibold  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] mb-1">
+              Colors
+            </h3>
             {isEdit || isCreate ? (
               <ProductColorsEditor
                 product={product}
                 setProduct={setProduct}
                 handleChangeProduct={handleChangeProduct}
               />
+            ) : loading ? (
+              <div className="h-16 w-full bg-gray-200 rounded-lg animate-pulse"></div>
             ) : (
               <div className="flex gap-3 mt-2">
                 {product.colors?.map((c, i) => (

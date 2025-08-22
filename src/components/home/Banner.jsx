@@ -23,11 +23,10 @@ export default function Banner() {
       <div className="w-full md:w-1/2 flex flex-col justify-center ">
         <div>
           <h1
-            className="text-3xl md:text-7xl font-eras bg-gradient-to-r from-[#27297c] to-[#27297c] 
-                 text-transparent bg-clip-text drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] 
-                 animate-fade-up duration-[1200ms] ease-out"
+            className="text-3xl md:text-7xl font-eras font-extraBold bg-gradient-to-r from-[#27297c] to-[#27297c] 
+               text-transparent bg-clip-text drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] 
+               animate-fade-up duration-[1200ms] ease-out"
           >
-            {" "}
             Super Siesta
           </h1>
           <h1

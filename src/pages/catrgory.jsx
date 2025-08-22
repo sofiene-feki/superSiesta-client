@@ -7,6 +7,7 @@ import Filters from "../components/shop/filters";
 import Product from "../components/product/Product";
 import Pagination from "../components/shop/Pagination";
 import { setCurrentPage } from "../redux/shopFilters/pageOptions";
+import { LoadingProduct } from "../components/ui";
 
 export default function Category() {
   const { Category } = useParams();
@@ -91,35 +92,41 @@ export default function Category() {
             mobileFiltersOpen={mobileFiltersOpen}
             setMobileFiltersOpen={setMobileFiltersOpen}
           />
-
-          <div className="lg:col-span-3">
-            <div
-              className={
-                view === "list"
-                  ? "flex flex-col space-y-4"
-                  : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 xl:gap-x-8"
-              }
-            >
-              {products.map((product) => (
-                <Product
-                  key={product._id}
-                  product={product}
-                  loading={loading}
-                  productsPerPage={productsPerPage}
+          {loading ? (
+            <div className="lg:col-span-3">
+              {" "}
+              <LoadingProduct length={3} cols={3} />
+            </div>
+          ) : (
+            <div className="lg:col-span-3">
+              <div
+                className={
+                  view === "list"
+                    ? "flex flex-col space-y-4"
+                    : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 xl:gap-x-8"
+                }
+              >
+                {products.map((product) => (
+                  <Product
+                    key={product._id}
+                    product={product}
+                    loading={loading}
+                    productsPerPage={productsPerPage}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-between items-center mt-8">
+                <Pagination
+                  currentPage={currentPage}
+                  pageCount={totalPages}
+                  onPageChange={handlePageChange}
                 />
-              ))}
+                <p className="text-gray-500 mt-8">
+                  {start} à {end} sur {totalProducts} produits
+                </p>
+              </div>
             </div>
-            <div className="flex justify-between items-center mt-8">
-              <Pagination
-                currentPage={currentPage}
-                pageCount={totalPages}
-                onPageChange={handlePageChange}
-              />
-              <p className="text-gray-500 mt-8">
-                {start} à {end} sur {totalProducts} produits
-              </p>
-            </div>
-          </div>
+          )}
         </div>
       </section>
     </main>

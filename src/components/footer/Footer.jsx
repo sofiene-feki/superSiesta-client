@@ -19,7 +19,7 @@ export default function Footer() {
               <p>
                 <strong>Phone:</strong>{" "}
                 <a
-                  href="tel:+21612345678"
+                  href="+216 58 811 911"
                   className="hover:underline text-[#87a736] transition-colors"
                 >
                   +216 58 811 911

@@ -4,6 +4,7 @@ import { CreditCardIcon } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../redux/cart/cartSlice";
+import { createOrder } from "../functions/order";
 
 export default function CheckoutPage() {
   const cartItems = useSelector((state) => state.cart.items);
@@ -13,8 +14,6 @@ export default function CheckoutPage() {
     fullName: "",
     phone: "",
     address: "",
-    city: "",
-    postalCode: "",
   });
 
   const [paymentMethod, setPaymentMethod] = useState("cod");
@@ -38,7 +37,7 @@ export default function CheckoutPage() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const orderData = {
@@ -46,16 +45,26 @@ export default function CheckoutPage() {
       items: cartItems,
       subtotal,
       shipping,
-      total,
       paymentMethod,
+      total,
     };
 
-    console.log("Order placed:", orderData);
+    try {
+      // Send order to server
+      const response = await createOrder(orderData);
+      console.log("✅ Order placed successfully:", response);
 
-    // Open welcome dialog
-    setIsOpen(true);
+      // Open success dialog
+      setIsOpen(true);
+
+      // Optionally clear cart and form
+      // clearCart();
+      // setFormData({ fullName: "", phone: "", address: "" });
+    } catch (error) {
+      console.error("❌ Error placing order:", error);
+      alert("Something went wrong. Please try again.");
+    }
   };
-
   return (
     <>
       {/* Welcome Dialog */}

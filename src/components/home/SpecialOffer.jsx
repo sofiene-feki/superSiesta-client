@@ -9,6 +9,7 @@ import {
   getProductOfTheYear,
   setProductOfTheYear,
 } from "../../functions/product";
+import { FormatDescription } from "../ui"; // Assuming you have this utility function
 
 export default function SpecialOfferCard() {
   const [timeLeft, setTimeLeft] = useState({
@@ -46,15 +47,20 @@ export default function SpecialOfferCard() {
   const [titles, setTitles] = useState([]);
   const [selectedSlug, setSelectedSlug] = useState("");
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   // fetch product titles on mount
   useEffect(() => {
+    setLoading(true);
     const fetchTitles = async () => {
       try {
         const res = await getAllProductTitles();
         setTitles(res);
       } catch (err) {
         console.error("❌ Error fetching titles:", err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchTitles();
@@ -62,18 +68,24 @@ export default function SpecialOfferCard() {
 
   useEffect(() => {
     const fetchProductOfTheYear = async () => {
+      setLoading(true);
+
       try {
         const prod = await getProductOfTheYear();
         setProduct(prod);
         setSelectedSlug(prod.slug); // set default selected
       } catch (error) {
         console.log("⚠️ No product of the year set yet.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchProductOfTheYear();
   }, []);
 
   const handleSelect = async (slug) => {
+    setLoading(true);
+
     try {
       setSelectedSlug(slug);
 
@@ -85,6 +97,8 @@ export default function SpecialOfferCard() {
       await setProductOfTheYear(slug);
     } catch (err) {
       console.error("❌ Error handling product selection:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -105,14 +119,18 @@ export default function SpecialOfferCard() {
 
       {/* Left Image Section */}
       <div className="md:w-1/2 flex items-center justify-center h-42 sm:h-42 md:h-[300px] lg:h-[400px] relative">
-        {/* Top shadow overlay */}
-        <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-gray-200/50 to-transparent pointer-events-none"></div>
-
-        <img
-          src={medico}
-          alt="Medico Pillow"
-          className="max-h-full max-w-full pt-10 object-contain relative z-10"
-        />
+        {loading ? (
+          <div className=" h-full w-full bg-gray-200 rounded-lg animate-pulse"></div>
+        ) : (
+          <>
+            <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-gray-200/50 to-transparent pointer-events-none"></div>
+            <img
+              src={medico}
+              alt="Medico Pillow"
+              className="max-h-full max-w-full pt-10 object-contain relative z-10"
+            />
+          </>
+        )}
       </div>
 
       {/* Right Info Section */}
@@ -131,23 +149,27 @@ export default function SpecialOfferCard() {
                 alt="Eco"
               />
               {/* Price */}
-              <div className="flex items-end gap-2">
-                <div className="relative flex items-start">
-                  <h3 className="text-2xl md:text-4xl font-bold text-[#87a736] leading-none">
-                    {discountedPrice}{" "}
-                  </h3>
-                  <span className="absolute -top-1 right-0 translate-x-full text-sm font-semibold text-gray-700">
-                    DT
+              {loading ? (
+                <div className="mt-4 h-8 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+              ) : (
+                <div className="flex items-end gap-2">
+                  <div className="relative flex items-start">
+                    <h3 className="text-2xl md:text-4xl font-bold text-[#87a736] leading-none">
+                      {discountedPrice}{" "}
+                    </h3>
+                    <span className="absolute -top-1 right-0 translate-x-full text-sm font-semibold text-gray-700">
+                      DT
+                    </span>
+                  </div>
+
+                  <span className="line-through text-gray-400 text-sm md:ml-0 ml-3 mt-1">
+                    {originalPrice}{" "}
+                  </span>
+                  <span className="text-xs text-red-500 font-semibold">
+                    Économisez {savings} DT
                   </span>
                 </div>
-
-                <span className="line-through text-gray-400 text-sm md:ml-0 ml-3 mt-1">
-                  {originalPrice}{" "}
-                </span>
-                <span className="text-xs text-red-500 font-semibold">
-                  Économisez {savings} DT
-                </span>
-              </div>
+              )}
             </div>
 
             {/* Countdown */}
@@ -162,41 +184,35 @@ export default function SpecialOfferCard() {
               </div>
             </div>
           </div>
+          {loading ? (
+            <div className="mt-4 h-8 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+          ) : (
+            <h3 className="text-lg md:text-xl font-semibold text-gray-800">
+              {product?.Title}{" "}
+            </h3>
+          )}
 
-          {/* Product Name */}
-          <h3 className="text-lg md:text-xl font-semibold text-gray-800">
-            {product?.Title}{" "}
-          </h3>
-
-          {/* Features */}
-          {/* <ul className="space-y-2 text-gray-700 text-sm md:text-base">
-            {[
-              "Deux couches de mousse densité 20/22",
-              "Jusqu’à 80kg par personne",
-              "Matelas réversible (été/hiver)",
-              "Tissu 80% coton anti-acarien",
-            ].map((feature) => (
-              <li key={feature} className="flex items-center">
-                <svg
-                  className="w-5 h-5 text-[#87a736] mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                {feature}
-              </li>
-            ))}
-          </ul> */}
-          <p className="space-y-2 text-gray-700 text-sm md:text-base">
-            {product?.Description}
-          </p>
+          {loading ? (
+            <div className="mt-4 h-18 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+          ) : (
+            <div className="">
+              {" "}
+              <p
+                className={`mt-2 text-gray-700 whitespace-pre-wrap ${
+                  expanded ? "" : "line-clamp-5"
+                }`}
+                dangerouslySetInnerHTML={{
+                  __html: FormatDescription(product?.Description || ""),
+                }}
+              />
+              <button
+                onClick={() => setExpanded(!expanded)}
+                className="text-blue-600 font-semibold hover:underline"
+              >
+                {expanded ? "Afficher moins" : "Afficher plus ..."}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* CTA */}

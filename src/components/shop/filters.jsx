@@ -90,7 +90,7 @@ export default function Filters({ mobileFiltersOpen, setMobileFiltersOpen }) {
       <Dialog
         open={mobileFiltersOpen}
         onClose={setMobileFiltersOpen}
-        className="relative z-40 lg:hidden"
+        className="relative z-50 lg:hidden"
       >
         <DialogBackdrop
           transition

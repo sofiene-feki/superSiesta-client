@@ -11,7 +11,7 @@ export default function ProductMediaGallery({
   isEditable = false,
 }) {
   return (
-    <div className="w-full lg:w-1/2 mb-6 lg:mb-0">
+    <div className="w-full lg:w-1/2 md:mb-6 mb-3 lg:mb-0">
       {/* Main Media */}
       <div className="mb-4">
         {selectedMedia ? (
@@ -19,7 +19,7 @@ export default function ProductMediaGallery({
             <img
               src={selectedMedia.src}
               alt={selectedMedia.alt}
-              className="w-full h-auto object-cover rounded-lg shadow-md"
+              className="w-full h-auto  max-h-[500px] object-cover rounded-lg shadow-md"
             />
           ) : (
             <video
