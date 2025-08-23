@@ -33,7 +33,7 @@ export default function CartDrawer() {
     <Dialog
       open={isOpen}
       onClose={() => dispatch(closeCart())}
-      className="relative z-50"
+      className="relative z-70"
     >
       {/* Backdrop with transition */}
       <DialogBackdrop

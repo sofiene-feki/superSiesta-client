@@ -62,6 +62,7 @@ const StyledToolbarButton = styled(ToolbarButton)(({ theme, ownerState }) => ({
 const StyledTextField = styled(TextField)(({ theme, ownerState }) => ({
   gridArea: "1 / 1",
   overflowX: "clip",
+  backgroundColor: "white",
   width: ownerState.expanded ? "100%" : "var(--trigger-width)",
   opacity: ownerState.expanded ? 1 : 0,
   // transition: theme.transitions.create(["width", "opacity"]),
@@ -181,19 +182,20 @@ export default function CustomToolbar({ products }) {
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
   return (
-    <Toolbar>
-      <div className="w-full flex items-center justify-between">
+    <Toolbar sx={{ px: 0, py: 0 }}>
+      <div className="w-full h-full px-1 md:px-2 flex items-center justify-between bg-gray-100">
         <div>
           <button
             onClick={handleModalOpen} // <-- open modal
-            className={`items-center gap-2 px-2 md:px-2 py-2 bg-green-50 text-green-700 rounded-xl shadow-sm text-xs md:text-xs hover:bg-green-100 transition
+            className={`items-center gap-1 px-1 md:px-2 py-2 bg-green-50 text-green-700 rounded-xl shadow-sm text-xs md:text-xs hover:bg-green-100 transition
             ${searchExpanded ? "hidden sm:inline-flex" : "inline-flex"}`}
           >
+            <PlusIcon className="w-4 h-4 md:h-6 md:w-6" />
             Crée une commande
           </button>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center px-1 md:px-2">
           <div
             className={` ${
               searchExpanded ? "hidden sm:inline-flex" : "inline-flex"
@@ -201,7 +203,7 @@ export default function CustomToolbar({ products }) {
           >
             <Tooltip title="Columns">
               <ColumnsPanelTrigger render={<ToolbarButton />}>
-                <ViewColumnIcon fontSize="small" />
+                <ViewColumnIcon sx={{ color: "#2c2d84" }} />
               </ColumnsPanelTrigger>
             </Tooltip>
             <Tooltip title="Filters">
@@ -213,18 +215,13 @@ export default function CustomToolbar({ products }) {
                       color="primary"
                       variant="dot"
                     >
-                      <FilterListIcon fontSize="small" />
+                      <FilterListIcon sx={{ color: "#2c2d84" }} />
                     </Badge>
                   </ToolbarButton>
                 )}
               />
             </Tooltip>
-            <Divider
-              orientation="vertical"
-              variant="middle"
-              flexItem
-              sx={{ mx: 0.5 }}
-            />
+
             <Tooltip title="Export">
               <ToolbarButton
                 ref={exportMenuTriggerRef}
@@ -234,7 +231,7 @@ export default function CustomToolbar({ products }) {
                 aria-expanded={exportMenuOpen ? "true" : undefined}
                 onClick={() => setExportMenuOpen(true)}
               >
-                <FileDownloadIcon fontSize="small" />
+                <FileDownloadIcon sx={{ color: "#2c2d84" }} />
               </ToolbarButton>
             </Tooltip>
           </div>
@@ -254,7 +251,7 @@ export default function CustomToolbar({ products }) {
                       color="default"
                       aria-disabled={state.expanded}
                     >
-                      <SearchIcon fontSize="small" />
+                      <SearchIcon sx={{ color: "#2c2d84" }} />
                     </StyledToolbarButton>
                   </Tooltip>
                 );
@@ -425,7 +422,7 @@ export default function CustomToolbar({ products }) {
           ${!selectedProduct ? "bg-gray-100 cursor-not-allowed" : "bg-white"}`}
                           >
                             <option value="">Sélectionnez une taille</option>
-                            {selectedProduct?.sizes.map((size) => (
+                            {selectedProduct?.sizes?.map((size) => (
                               <option key={size._id} value={size._id}>
                                 {size.name} - {size.price} DT
                               </option>

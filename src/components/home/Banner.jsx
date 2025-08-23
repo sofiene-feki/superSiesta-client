@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export default function Banner() {
   return (
     <div
-      className="flex flex-col  md:flex-row p-3 md:p-10 gap-4 mx-auto md:mx-10 shadow-xl rounded-b-xl bg-white"
+      className="flex flex-col min-h-[60vh]  md:flex-row p-3 md:p-10 gap-4 mx-auto md:mx-10 shadow-xl rounded-b-xl bg-white"
       style={{
         backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.9)), url(${bannerBG})`,
         backgroundAttachment: "fixed",

@@ -13,6 +13,13 @@ import Chip from "@mui/material/Chip";
 import CustomToolbar from "../components/ui/CustomToolbar";
 import { getAllProductTitles } from "../functions/product";
 //import SideNavModal from "../../components/pageProps/shopPage/shopBy/SideNavModal";
+import {
+  MdCheckCircle,
+  MdLocalShipping,
+  MdThumbUp,
+  MdCancel,
+  MdHourglassEmpty,
+} from "react-icons/md";
 
 const Order = () => {
   const [orders, setOrders] = useState([]);
@@ -66,47 +73,72 @@ const Order = () => {
   };
 
   const columns = [
-    { field: "index", headerName: "#", width: 70 },
-    { field: "clientName", headerName: "Client", width: 200 },
-    { field: "adresse", headerName: "Adresse", width: 200 },
-    { field: "phone", headerName: "Télephone", width: 130 },
-    { field: "productCount", headerName: "Nbr produit", width: 90 },
+    { field: "index", headerName: <strong>#</strong>, width: 70 },
+    { field: "clientName", headerName: <strong>Client</strong>, width: 160 },
+    { field: "adresse", headerName: <strong>Adresse</strong>, width: 200 },
+    { field: "phone", headerName: <strong>Télephone</strong>, width: 160 },
+    {
+      field: "productCount",
+      headerName: <strong>Nbr produit</strong>,
+      width: 110,
+    },
     {
       field: "total",
-      headerName: "total",
-      width: 90,
+      headerName: <strong>total</strong>,
+      width: 100,
     },
     {
       field: "status",
-      headerName: "Status",
-      width: 150,
+      headerName: <strong>Status</strong>,
+      width: 170,
       renderCell: (params) => {
         if (!params.value) return null;
 
         let color = "default";
+        let icon = null;
+
         switch (params.value.toLowerCase()) {
-          case "delivered":
+          case "livrée":
             color = "success";
+            icon = <MdCheckCircle size={18} />;
             break;
-          case "confirmed":
+          case "expédiée":
+            color = "secondary";
+            icon = <MdLocalShipping size={18} />;
+            break;
+          case "confirmée":
+            color = "primary";
+            icon = <MdThumbUp size={18} />;
+            break;
+          case "annulée":
             color = "error";
+            icon = <MdCancel size={18} />;
             break;
-          case "pending":
+          case "en attente":
             color = "warning";
+            icon = <MdHourglassEmpty size={18} />;
             break;
           default:
             color = "default";
         }
 
-        return <Chip label={params.value} color={color} variant="outlined" />;
+        return (
+          <Chip
+            icon={icon}
+            label={params.value}
+            color={color}
+            variant="outlined"
+            sx={{ textTransform: "capitalize" }}
+          />
+        );
       },
     },
-    { field: "createdAt", headerName: "Date", width: 180 },
+    { field: "createdAt", headerName: <strong>Date</strong>, width: 160 },
     {
       field: "actions",
-      headerName: "Actions",
+      headerName: <strong>Actions</strong>,
       type: "actions",
-      width: 100,
+      width: 120,
       getActions: (params) => [
         <Tooltip title="voir" arrow key="view">
           <GridActionsCellItem
@@ -152,31 +184,16 @@ const Order = () => {
 
   return (
     <div>
-      <div className="mx-auto max-w-7xl mx-auto md:py-16 py-8 px-4">
+      <div className="mx-auto max-w-7xl mx-auto md:py-8 py-4 px-4">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-gray-900">
           Suivi des commandes
         </h1>
         {/* <Breadcrumbs title="Finaliser votre commande" /> */}
         <Box
           sx={{
-            height: 400,
+            height: 500,
             width: "100%",
-            "& .super-app-theme--cell": {
-              backgroundColor: "rgba(224, 183, 60, 0.55)",
-              color: "#1a3e72",
-              fontWeight: "600",
-            },
-            "& .super-app.negative": {
-              backgroundColor: "rgba(157, 255, 118, 0.49)",
-              color: "#1a3e72",
-              fontWeight: "600",
-            },
-            "& .super-app.positive": {
-              backgroundColor: "#d47483",
-              color: "#1a3e72",
-              fontWeight: "600",
-            },
-            "& .status-pending": {
+            "& .status-En attente": {
               backgroundColor: "rgba(224, 183, 60, 0.55)",
               color: "#1a3e72",
               fontWeight: "600",
@@ -207,6 +224,17 @@ const Order = () => {
         >
           {" "}
           <DataGrid
+            sx={{
+              boxShadow: 6,
+              border: 1,
+              borderColor: "black",
+              "& .MuiDataGrid-row:hover": {
+                color: "primary.main",
+              },
+              "& .MuiDataGrid-footerContainer": {
+                backgroundColor: "#f3f4f6ff",
+              },
+            }}
             rows={orders}
             columns={columns}
             loading={false}

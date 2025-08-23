@@ -6,6 +6,7 @@ import {
   HeartIcon,
   MagnifyingGlassIcon,
   ShoppingBagIcon,
+  UserIcon,
   ViewColumnsIcon,
 } from "@heroicons/react/24/outline";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -128,7 +129,7 @@ export default function HeaderBottom() {
   }
 
   return (
-    <div className="bg-white sticky top-14.5 z-50 border-t border-gray-200 shadow-lg">
+    <div className="bg-gray-100 sticky top-14.5 z-50 border-t border-gray-200 shadow-lg print:hidden">
       <div className="flex px-2 pt-3 justify-between hidden">
         <Menu as="div" className="relative ">
           <MenuButton>
@@ -211,7 +212,7 @@ export default function HeaderBottom() {
             <input
               type="text"
               placeholder="Rechercher un produit..."
-              className="flex-1 px-2 py-2 text-sm border border-gray-300 rounded-l-md shadow-md focus:outline-none  placeholder-gray-400"
+              className="flex-1 px-2 py-2 text-sm border bg-white border-gray-300 rounded-l-md shadow-md focus:outline-none  placeholder-gray-400"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => results.length > 0 && setShowDropdown(true)}
@@ -298,17 +299,11 @@ export default function HeaderBottom() {
 
         {/* Right: Favorites, Cart, Profile */}
         <div className="hidden md:flex items-center gap-4">
-          <Link
-            to="/favorites"
-            className="p-2 text-gray-600 hover:text-[#2c2d84] transition"
-          >
-            <HeartIcon className="w-6 h-6" />
-          </Link>
           <button
             onClick={() => dispatch(openCart())}
             className="relative p-2 text-gray-600 hover:text-[#2c2d84] transition"
           >
-            <ShoppingBagIcon className="w-6 h-6" />
+            <ShoppingBagIcon className="w-7 h-7" />
 
             {totalQty > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
@@ -358,11 +353,8 @@ export default function HeaderBottom() {
                 </MenuItems>
               </Menu>
             ) : (
-              <Link
-                to="/login"
-                className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-500"
-              >
-                Login
+              <Link to="/login">
+                <UserIcon className="w-8 h-8 text-gray-600" />
               </Link>
             )}
           </>

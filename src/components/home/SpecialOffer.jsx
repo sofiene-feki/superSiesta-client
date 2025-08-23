@@ -134,13 +134,13 @@ export default function SpecialOfferCard() {
       </div>
 
       {/* Right Info Section */}
-      <div className="md:w-1/2 md:p-8 p-4 flex flex-col justify-between space-y-4 bg-gray-50">
+      <div className="md:w-1/2 flex  flex-col justify-between p-2  bg-gray-100">
         {/* Header */}
         <div className="space-y-3">
           <div className="flex justify-between items-start">
             {/* Title + Price */}
             <div className="relative space-y-2">
-              <h2 className="text-gray-900 font-extrabold text-2xl md:text-4xl tracking-tight">
+              <h2 className="text-gray-900  font-extrabold text-2xl md:text-4xl tracking-tight">
                 Offre Spéciale
               </h2>
               <img
@@ -173,9 +173,10 @@ export default function SpecialOfferCard() {
             </div>
 
             {/* Countdown */}
-            <div className="bg-gray-100 text-gray-800 rounded-lg px-3 py-2 text-center shadow-lg">
+            <div className="bg-white text-gray-800  px-3 py-2 text-center shadow-lg">
               <p className="text-xs md:text-base font-medium">
-                Reste : <span className="font-semibold">{timeLeft.days} j</span>
+                Reste:{" "}
+                <span className="font-semibold">{timeLeft.days}jours</span>
               </p>
               <div className="flex items-center gap-1 mt-1">
                 <ClockSquare value={timeLeft.hours} />

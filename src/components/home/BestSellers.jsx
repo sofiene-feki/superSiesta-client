@@ -80,7 +80,7 @@ export default function NewArrivals() {
 
   return (
     <div className="mx-auto max-w-7xl md:mb-16 py-4 md:py-8 sm:px-6 sm:py-8">
-      <div className="flex px-2 items-center justify-between mb-4">
+      <div className="flex px-2 items-center justify-between">
         <h2 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900">
           Meilleur Vente
         </h2>

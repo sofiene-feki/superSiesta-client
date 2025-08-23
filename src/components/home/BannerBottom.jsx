@@ -7,7 +7,7 @@ import React from "react";
 
 export default function BannerBottom() {
   return (
-    <div className="w-full py-4 md:py-8">
+    <div className="w-full py-4 md:py-4">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-2 px-4">
         {/* Large Choix Section */}
         <div className="bg-white p-2 md:p-6 rounded-lg shadow-lg flex items-center gap-4">

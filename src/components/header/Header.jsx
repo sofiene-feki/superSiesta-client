@@ -11,6 +11,7 @@ import {
 import {
   Bars3Icon,
   ShoppingBagIcon,
+  UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Link, useLocation } from "react-router-dom";
@@ -27,7 +28,6 @@ const navigation = [
   { name: "Produits", href: "/shop" },
   { name: "À propos", href: "/about" },
   { name: "Nous Contacter", href: "/contact" },
-  { name: "se connecter", href: "/login" },
 ];
 
 function classNames(...classes) {
@@ -57,7 +57,7 @@ export default function Header() {
     }
   };
   return (
-    <nav className="bg-white sticky top-0 z-60 shadow-lg">
+    <nav className="bg-white sticky top-0 z-60 shadow-lg print:hidden">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="flex h-14.5 items-center justify-between">
           {/* Mobile: Menu button + Logo */}
@@ -109,7 +109,7 @@ export default function Header() {
 
           {/* Cart + User */}
           <div className="flex items-center gap-3 mt-2 p-3 md:hidden">
-            {isAuthenticated && userInfo && (
+            {isAuthenticated && userInfo ? (
               <Menu as="div" className="relative ">
                 <MenuButton className="flex items-center">
                   <img
@@ -147,6 +147,11 @@ export default function Header() {
                   ))}
                 </MenuItems>
               </Menu>
+            ) : (
+              <Link to="/login">
+                {" "}
+                <UserIcon className="w-8 h-8 text-[#2c2d84]" />
+              </Link>
             )}
             <button
               onClick={() => dispatch(openCart())}
@@ -195,25 +200,18 @@ export default function Header() {
           >
             <Dialog.Panel className="fixed inset-x-0 top-0 bg-white border-t border-gray-200">
               {/* Close button */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
-                <Link to="/" className="items-center h-12">
-                  <img
-                    className="h-full w-auto"
-                    src={logo}
-                    alt="Your Company"
-                    draggable={false}
-                  />
-                </Link>{" "}
+              <div className=" flex items-center h-8 justify-between px-4 ">
+                <Link to="/" className="items-center h-8"></Link>{" "}
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-md text-gray-500 hover:text-gray-900"
+                  className="absolute top-16 right-3 rounded-md text-gray-500 hover:text-gray-900"
                 >
                   <XMarkIcon className="h-6 w-6" />
                 </button>
               </div>
 
               {/* Menu Links */}
-              <div className="space-y-1 px-2 pt-2 pb-3">
+              <div className="space-y-1 mt-6 px-2 pb-3">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}

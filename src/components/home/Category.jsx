@@ -19,6 +19,7 @@ const categories = [
     link: "/category/soft+",
     image: soft,
     bg: "from-[#abc8ee]/30 via-[#abc8ee]/20 to-transparent",
+    buttonBg: "#adc9f07a",
     startPrice: 220,
   },
   {
@@ -26,6 +27,8 @@ const categories = [
     link: "/category/venise+",
     image: venise,
     bg: "from-[#f4ad9f]/20 via-[#f4ad9f]/10 to-transparent",
+    buttonBg: "#edaea17e",
+
     startPrice: 260,
   },
   {
@@ -33,6 +36,8 @@ const categories = [
     link: "/category/medico+",
     image: medico,
     bg: "from-[#90bfb6]/20 via-[#90bfb6]/10 to-transparent",
+    buttonBg: "#8abcbe8a",
+
     startPrice: 360,
   },
   {
@@ -40,6 +45,7 @@ const categories = [
     link: "/category/relax+",
     image: relax,
     bg: "from-[#9996ba]/20 via-[#9996ba]/10 to-transparent",
+    buttonBg: "#a4a2c87c",
     startPrice: 435,
   },
   {
@@ -47,6 +53,7 @@ const categories = [
     link: "/category/tendresse+",
     image: tendresse,
     bg: "from-[#ce8392]/20 via-[#ce8392]/10 to-transparent",
+    buttonBg: "#ce919b71",
     startPrice: 595,
   },
   {
@@ -54,6 +61,7 @@ const categories = [
     link: "/category/topRelax+",
     image: topRelax,
     bg: "from-[#c1a3a3]/20 via-[#c1a3a3]/10 to-transparent",
+    buttonBg: "#bd9fa17a",
     startPrice: 885,
   },
   {
@@ -61,6 +69,7 @@ const categories = [
     link: "/category/oreiller",
     image: oreiller,
     bg: "from-[#000000]/20 via-[#000000]/10 to-transparent",
+    buttonBg: "#ffffff7a",
     startPrice: 25,
   },
   {
@@ -68,6 +77,7 @@ const categories = [
     link: "/category/protege",
     image: protege,
     bg: "from-[#000000]/20 via-[#000000]/10 to-transparent",
+    buttonBg: "#ffffff7a",
     startPrice: 70,
   },
 ];
@@ -135,9 +145,9 @@ export default function Category() {
   };
 
   return (
-    <section className="max-w-screen-xl  mb-0 mx-auto  sm:px-6 lg:px-8 pt-4 md:py-8">
+    <section className="max-w-screen-xl  mb-0 mx-auto  sm:px-6 lg:px-8 pt-1 md:py-4">
       {/* Header */}
-      <header className="flex items-center px-2 md:px:0 justify-between mb-4">
+      <header className="flex items-center px-2 md:px:0 justify-between mb-2">
         <h2 className="text-xl  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] md:text-2xl font-bold tracking-tight text-gray-900">
           Nos Collections
         </h2>
@@ -173,7 +183,10 @@ export default function Category() {
               />
 
               {/* Top-right price badge */}
-              <div className="absolute top-3 right-0 z-20 bg-white text-gray-800 text-sm md:text-base font-semibold px-5 py-2 rounded-l-md shadow-lg backdrop-blur-sm bg-opacity-90 animate-pulse-glow">
+              <div
+                style={{ backgroundColor: cat.buttonBg }}
+                className="absolute top-3  right-0 z-20  text-gray-800 text-sm md:text-base font-semibold px-5 py-2 rounded-l-md shadow-lg backdrop-blur-sm bg-opacity-90 animate-pulse-glow"
+              >
                 À partir de {cat.startPrice}
                 <span className="absolute top-1 right-2  text-gray-500 text-[10px] font-bold ">
                   DT
@@ -184,7 +197,7 @@ export default function Category() {
               <div className="absolute inset-0 group-hover:bg-black/5 transition z-20" />
 
               {/* Bottom text */}
-              <p className="absolute bottom-3 left-4 z-20 text-gray[800] text-lg md:text-md font-semibold underline-offset-4 group-hover:underline">
+              <p className="absolute bottom-1 left-2 z-20 text-gray[800] text-xm md:text-md font-semibold underline-offset-4 group-hover:underline">
                 Découvrir notre collection →
               </p>
             </Link>

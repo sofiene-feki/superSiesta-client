@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { authStart, authSuccess, authFailure } from "../redux/user/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../service/firebase";
 import logo from "../assets/logo_supersiesta.png";
 
@@ -39,7 +39,10 @@ export default function Login() {
       <div className="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full border border-gray-100">
         {/* Logo Section */}
         <div className="flex flex-col items-center mb-6">
-          <img src={logo} alt="App Logo" className="h-16 w-auto  mb-2" />
+          <Link to="/">
+            {" "}
+            <img src={logo} alt="App Logo" className="h-16 w-auto  mb-2" />
+          </Link>
           <h1 className="text-2xl font-bold text-gray-800">Bienvenue</h1>
           <p className="text-gray-500 text-sm">Connectez-vous pour continuer</p>
         </div>
