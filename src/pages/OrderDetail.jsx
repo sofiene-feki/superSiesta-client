@@ -48,7 +48,7 @@ export default function OrderDetail() {
 
   return (
     <div
-      className="max-w-4xl mx-auto md:my-4  bg-white md:p-4 p-4 print:shadow-none print:p-0 print:rounded-none print:max-w-full print:text-black"
+      className="max-w-4xl mx-auto md:my-4  bg-white md:p-4 p-1 print:shadow-none print:p-0 print:rounded-none print:max-w-full print:text-black"
       ref={invoiceRef}
     >
       <div className="print:hidden flex mb-3 justify-end items-center gap-x-3">
@@ -71,10 +71,14 @@ export default function OrderDetail() {
       </div>
 
       {/* Header */}
-      <div className=" bg-white md:p-8 p-4 shadow-md rounded-lg border border-gray-300 ">
+      <div className=" bg-white md:p-8 p-2 shadow-md rounded-lg border border-gray-300 ">
         {" "}
         <div className="flex items-center justify-between border-b  mb-4 print:border-none">
-          <img src={logo_supersiesta} alt="Logo" className="h-12 w-auto mb-2" />
+          <img
+            src={logo_supersiesta}
+            alt="Logo"
+            className="md:h-12 h-8 w-auto mb-2"
+          />
           <div className="text-right text-sm text-gray-600 print:text-black">
             <p>Réf #: {order._id}</p>
             <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
@@ -181,10 +185,10 @@ export default function OrderDetail() {
           </table>
         </div>
         <div className="mt-8 text-sm flex justify-between text-center text-gray-500 print:text-black print:mt-12">
-          <p className="mb-1">Contact</p>
+          <p className="mb-1"></p>
           <p className="mb-1">
             Tél : +216 12 345 678{" "}
-            <span className="ml-4">Email : contact@supersiesta.tn</span>
+            <span className="ml-2">Email : contact@supersiesta.tn</span>
           </p>
         </div>
       </div>
