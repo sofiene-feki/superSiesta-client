@@ -184,7 +184,7 @@ const Order = () => {
 
   return (
     <div>
-      <div className="mx-auto max-w-7xl mx-auto md:py-8 py-4 px-4">
+      <div className="mx-auto max-w-7xl mx-auto md:py-8 py-4 px-1 md:px-4">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-gray-900">
           Suivi des commandes
         </h1>
@@ -193,33 +193,6 @@ const Order = () => {
           sx={{
             height: 500,
             width: "100%",
-            "& .status-En attente": {
-              backgroundColor: "rgba(224, 183, 60, 0.55)",
-              color: "#1a3e72",
-              fontWeight: "600",
-              borderRadius: "4px",
-              padding: "2px 8px",
-              display: "inline-block",
-              textAlign: "center",
-            },
-            "& .status-shipped": {
-              backgroundColor: "rgba(157, 255, 118, 0.49)",
-              color: "#1a3e72",
-              fontWeight: "600",
-              borderRadius: "4px",
-              padding: "2px 8px",
-              display: "inline-block",
-              textAlign: "center",
-            },
-            "& .status-delivered": {
-              // backgroundColor: "#1ae06dff",
-              color: "#1ae06dff",
-              fontWeight: "600",
-              borderRadius: "4px",
-              padding: "1px 1px",
-              display: "inline-block",
-              textAlign: "center",
-            },
           }}
         >
           {" "}
@@ -237,7 +210,7 @@ const Order = () => {
             }}
             rows={orders}
             columns={columns}
-            loading={false}
+            loading={loading}
             pageSize={10}
             slots={{ toolbar: CustomToolbar }}
             slotProps={{

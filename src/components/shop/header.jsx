@@ -79,9 +79,9 @@ export default function Header({
   const user = useSelector((state) => state.user.userInfo);
 
   return (
-    <div className="block md:flex items-baseline justify-between border-b border-gray-200 md:pt-24 pt-8 pb-0 gap-4">
+    <div className="block md:flex items-baseline justify-between border-b border-gray-200 md:pt-8 pt-8 pb-0 gap-4">
       {/* Title */}
-      <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 w-full md:w-1/4">
+      <h1 className="text-3xl mb-2 md:text-4xl font-bold tracking-tight text-gray-900 w-full md:w-1/4">
         {formattedCategory || "Shop"}{" "}
         <span className="hidden md:inline text-xs md:text-base font-medium tracking-tight text-gray-600">
           products ({totalProducts})

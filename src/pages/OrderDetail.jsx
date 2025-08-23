@@ -51,7 +51,7 @@ export default function OrderDetail() {
       className="max-w-4xl mx-auto md:my-4  bg-white md:p-4 p-1 print:shadow-none print:p-0 print:rounded-none print:max-w-full print:text-black"
       ref={invoiceRef}
     >
-      <div className="print:hidden flex mb-3 justify-end items-center gap-x-3">
+      <div className="print:hidden flex my-3 px-1 justify-end items-center gap-x-3">
         {/* Back Button */}
         <button
           onClick={() => navigate("/orders")}
@@ -184,7 +184,7 @@ export default function OrderDetail() {
             </tfoot>
           </table>
         </div>
-        <div className="mt-8 text-sm flex justify-between text-center text-gray-500 print:text-black print:mt-12">
+        <div className="mt-8 md:text-sm text-xs flex justify-between text-center text-gray-500 print:text-black print:mt-12">
           <p className="mb-1"></p>
           <p className="mb-1">
             Tél : +216 12 345 678{" "}
