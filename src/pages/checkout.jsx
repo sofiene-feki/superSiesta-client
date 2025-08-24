@@ -223,13 +223,19 @@ export default function CheckoutPage() {
                       className="w-24 h-24 object-cover rounded"
                     />
                     <div>
-                      <p className="font-semibold line-clamp-2">{item.name}</p>
-                      <p className="text-sm text-gray-500">
-                        Couleur: {item.selectedColor}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        Taille: {item.selectedSize}
-                      </p>
+                      <p className="font-semibold line-clamp-2">
+                        {item.name} x {item.quantity}
+                      </p>{" "}
+                      {item.selectedColor && (
+                        <p className="text-sm text-gray-500">
+                          Couleur: {item.selectedColor}
+                        </p>
+                      )}
+                      {item.selectedSize && (
+                        <p className="text-sm text-gray-500">
+                          Taille: {item.selectedSize}
+                        </p>
+                      )}
                       <p className="text-gray-800 font-semibold">
                         {item.selectedSizePrice != null
                           ? item.selectedSizePrice

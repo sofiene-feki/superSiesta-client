@@ -10,6 +10,7 @@ import {
   setProductOfTheYear,
 } from "../../functions/product";
 import { FormatDescription } from "../ui"; // Assuming you have this utility function
+import { Link } from "react-router-dom";
 
 export default function SpecialOfferCard() {
   const [timeLeft, setTimeLeft] = useState({
@@ -110,41 +111,53 @@ export default function SpecialOfferCard() {
   ).toFixed(2);
   const savings = +(originalPrice - discountedPrice).toFixed(2);
 
+  const BASE_URL = "https://supersiesta-server-i63m.onrender.com"; // Change this to your real base URL
+
   return (
     <div className="max-w-7xl h-auto mx-auto bg-white border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row hover:shadow-2xl transition-shadow duration-300 relative">
       {/* Discount Ribbon */}
-      <div className="absolute top-4 left-4 bg-red-500 text-white text-xs md:text-sm font-bold py-1 px-3 rounded-tr-lg rounded-bl-lg shadow-lg z-10">
-        {promotion}%
+      <div
+        className="absolute top-4 left-4 text-white text-xs md:text-sm font-bold py-1 px-3 rounded-md shadow-lg z-10
+             bg-gradient-to-r from-red-500 via-red-600 to-red-500 bg-[length:200%_200%] animate-gradientMove
+             hover:scale-75 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+      >
+        - {promotion}%
       </div>
 
       {/* Left Image Section */}
-      <div className="md:w-1/2 flex items-center justify-center h-42 sm:h-42 md:h-[300px] lg:h-[400px] relative">
+      <div className="md:w-1/2 flex items-center justify-center h-56 sm:h-42 md:h-[300px] lg:h-[400px] relative">
         {loading ? (
           <div className=" h-full w-full bg-gray-200 rounded-lg animate-pulse"></div>
         ) : (
           <>
-            <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-gray-200/50 to-transparent pointer-events-none"></div>
+            <div className="absolute top-0 left-0 w-full h-full  pointer-events-none z-20"></div>
             <img
-              src={medico}
-              alt="Medico Pillow"
-              className="max-h-full max-w-full pt-10 object-contain relative z-10"
+              src={
+                product?.media && product.media.length > 0
+                  ? `${BASE_URL}${product.media[0].src}`
+                  : "/default-placeholder.png"
+              }
+              alt={
+                product?.media?.[0]?.alt || product?.Title || "Product Image"
+              }
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </>
         )}
       </div>
 
       {/* Right Info Section */}
-      <div className="md:w-1/2 flex  flex-col justify-between p-2  bg-gray-100">
+      <div className="md:w-1/2 flex  flex-col justify-between p-2 md:p-4 bg-gray-100">
         {/* Header */}
-        <div className="space-y-3">
+        <div className="space-y-1 md:space-y-3">
           <div className="flex justify-between items-start">
             {/* Title + Price */}
-            <div className="relative space-y-2">
+            <div className="relative space-y-1 md:space-y-2 my-2 md:my-0">
               <h2 className="text-gray-900  font-extrabold text-2xl md:text-4xl tracking-tight">
                 Offre Spéciale
               </h2>
               <img
-                className="absolute -top-2 right-2 md:-right-8 w-8 h-8 md:w-10 md:h-10"
+                className="absolute -top-3 right-7 md:-right-8 w-8 h-8 md:w-10 md:h-10"
                 src={eco}
                 alt="Eco"
               />
@@ -188,7 +201,7 @@ export default function SpecialOfferCard() {
           {loading ? (
             <div className="mt-4 h-8 w-full bg-gray-200 rounded-lg animate-pulse"></div>
           ) : (
-            <h3 className="text-lg md:text-xl font-semibold text-gray-800">
+            <h3 className="text-lg md:text-xl font-bold text-black">
               {product?.Title}{" "}
             </h3>
           )}
@@ -199,8 +212,8 @@ export default function SpecialOfferCard() {
             <div className="">
               {" "}
               <p
-                className={`mt-2 text-gray-700 whitespace-pre-wrap ${
-                  expanded ? "" : "line-clamp-5"
+                className={`text-gray-600 whitespace-pre-wrap ${
+                  expanded ? "" : "line-clamp-3 md:line-clamp-6"
                 }`}
                 dangerouslySetInnerHTML={{
                   __html: FormatDescription(product?.Description || ""),
@@ -235,13 +248,15 @@ export default function SpecialOfferCard() {
             {/* Add more categories as needed */}
           </select>
         ) : (
-          <button
-            className="flex items-center justify-center gap-3 px-6 py-2 text-white text-lg font-bold rounded-xl shadow-lg bg-gradient-to-r from-[#87a736] via-green-500 to-[#87a736] bg-[length:200%_200%] animate-gradientMove hover:scale-105 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 focus:ring-4 focus:ring-green-300"
-            aria-label="Acheter Medico Pillow"
-          >
-            <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-            Acheter Maintenant
-          </button>
+          <Link to={`product/${product?.slug}`} className="block w-full">
+            <button
+              className="w-full flex items-center justify-center gap-3 md:mt-0 mt-2 px-6 py-2 text-white text-lg font-bold rounded-lg shadow-lg bg-[#87a736]  hover:scale-101 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 focus:ring-4 focus:ring-green-300"
+              aria-label="Acheter Medico Pillow"
+            >
+              <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+              Acheter Maintenant
+            </button>
+          </Link>
         )}
       </div>
     </div>

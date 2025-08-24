@@ -443,7 +443,7 @@ export default function ProductDetails() {
               {loading ? (
                 <div className=" h-8 mb-2 w-1/4 bg-gray-200 rounded-lg animate-pulse"></div>
               ) : (
-                <p className="text-3xl md:flex border-b border-gray-200 pb-4 justify-between font-bold break-words bg-clip-text drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)] text-gray-900 mb-3">
+                <p className="text-3xl md:flex border-b border-gray-200  justify-between font-bold break-words bg-clip-text drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)] text-gray-900 mb-3">
                   <span>
                     {formatPrice(selectedSize?.price ?? product.Price)}
                   </span>
@@ -486,9 +486,12 @@ export default function ProductDetails() {
 
           {/* Sizes */}
           <div className="mb-4">
-            <h3 className="font-semibold  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]  mb-1">
-              Sizes & Prices
-            </h3>
+            {product?.sizes && product.sizes.length > 0 && (
+              <h3 className="font-semibold  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] mb-1">
+                Tailles & Prix
+              </h3>
+            )}
+            <h3 className="font-semibold  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]  mb-1"></h3>
             {isEdit || isCreate ? (
               <ProductSizesEditor
                 product={product}
@@ -519,9 +522,12 @@ export default function ProductDetails() {
 
           {/* Colors */}
           <div className="mb-6">
-            <h3 className="font-semibold  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] mb-1">
-              Colors
-            </h3>
+            {product?.colors && product.colors.length > 0 && (
+              <h3 className="font-semibold  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] mb-1">
+                Couleurs
+              </h3>
+            )}
+
             {isEdit || isCreate ? (
               <ProductColorsEditor
                 product={product}

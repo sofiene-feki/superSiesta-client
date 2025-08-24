@@ -10,7 +10,7 @@ export default function BannerBottom() {
     <div className="w-full py-4 md:py-4">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-2 px-4">
         {/* Large Choix Section */}
-        <div className="bg-white p-2 md:p-6 rounded-lg shadow-lg flex items-center gap-4">
+        <div className="bg-white p-2 md:p-4 rounded-lg shadow-lg flex items-center gap-4">
           <div className="text-4xl text-[#87a736]">
             <CheckBadgeIcon className="block md:h-12 md:w-12 h-8 w-8" />
           </div>
@@ -24,7 +24,7 @@ export default function BannerBottom() {
           </div>
         </div>
         {/* Support Section */}
-        <div className="bg-white p-2 md:p-6 rounded-lg shadow-lg flex items-center gap-4">
+        <div className="bg-white p-2 md:p-4 rounded-lg shadow-lg flex items-center gap-4">
           <div className="text-4xl text-[#87a736]">
             <ClockIcon className="block md:h-12 md:w-12 h-8 w-8" />
           </div>
@@ -37,7 +37,7 @@ export default function BannerBottom() {
         </div>
 
         {/* Livraison Section */}
-        <div className="bg-white p-2 md:p-6 rounded-lg shadow-lg flex items-center gap-4">
+        <div className="bg-white p-2 md:p-4 rounded-lg shadow-lg flex items-center gap-4">
           <div className="text-4xl text-[#87a736]">
             <TruckIcon className="block md:h-12 md:w-12 h-8 w-8" />
           </div>

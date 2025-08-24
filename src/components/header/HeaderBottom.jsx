@@ -27,6 +27,30 @@ export default function HeaderBottom() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const SERVER_URL = "https://supersiesta-server-i63m.onrender.com";
+
+  const normalizeMediaSrc = (input) => {
+    if (!input) return input;
+
+    // If input is an array, normalize each item
+    if (Array.isArray(input)) {
+      return input.map((item) => normalizeMediaSrc(item));
+    }
+
+    // If input is not an object or has no media, return as is
+    if (typeof input !== "object" || !input.media) return input;
+
+    // Normalize each media src
+    const normalizedMedia = Array.isArray(input.media)
+      ? input.media.map((m) => ({
+          ...m,
+          src: m?.src?.startsWith("http") ? m.src : SERVER_URL + m.src,
+        }))
+      : [];
+
+    return { ...input, media: normalizedMedia };
+  };
+
   const handleSearch = async () => {
     if (!query.trim()) {
       setResults([]);
@@ -37,7 +61,8 @@ export default function HeaderBottom() {
     setShowDropdown(true); // show dropdown as soon as search starts
     try {
       const { data } = await searchProducts({ query });
-      setResults(data.products);
+      const normalizedResults = normalizeMediaSrc(data.products || []);
+      setResults(normalizedResults);
     } catch (err) {
       console.error(err);
       setResults([]); // clear results on error
@@ -70,21 +95,6 @@ export default function HeaderBottom() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (query.trim() === "") {
-  //     setResults([]);
-  //     setShowDropdown(false);
-  //     return;
-  //   }
-
-  //   // Filter products based on query (you can replace this with API call)
-  //   const filtered = products.filter((product) =>
-  //     product.name.toLowerCase().includes(query.toLowerCase())
-  //   );
-  //   setResults(filtered);
-  //   setShowDropdown(filtered.length > 0);
-  // }, [query, products]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Optional: handle submit, maybe navigate to a search results page
@@ -103,13 +113,6 @@ export default function HeaderBottom() {
     } catch (err) {
       console.error("Logout error:", err);
     }
-  };
-
-  const user = {
-    name: "Tom Cook",
-    email: "tom@example.com",
-    imageUrl:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   };
 
   const userNavigation = [

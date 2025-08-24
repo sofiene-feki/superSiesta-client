@@ -125,7 +125,7 @@ export default function Category() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     arrows: true,
     nextArrow: <NextArrow />,
@@ -148,12 +148,12 @@ export default function Category() {
     <section className="max-w-screen-xl  mb-0 mx-auto  sm:px-6 lg:px-8 pt-1 md:py-4">
       {/* Header */}
       <header className="flex items-center px-2 md:px:0 justify-between mb-2">
-        <h2 className="text-xl  break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] md:text-2xl font-bold tracking-tight text-gray-900">
+        <h2 className="text-xl  md:text-2xl font-bold tracking-tight text-gray-900">
           Nos Collections
         </h2>
         <Link
-          to="/categories"
-          className="text-blue-600 break-words bg-clip-text  drop-shadow-[0_2px_4px_rgba(0,0,255,0.3)] font-semibold hover:underline"
+          to="/shop"
+          className="text-blue-600 font-semibold hover:underline"
         >
           Voir tous →
         </Link>
@@ -185,7 +185,7 @@ export default function Category() {
               {/* Top-right price badge */}
               <div
                 style={{ backgroundColor: cat.buttonBg }}
-                className="absolute top-3  right-0 z-20  text-gray-800 text-sm md:text-base font-semibold px-5 py-2 rounded-l-md shadow-lg backdrop-blur-sm bg-opacity-90 animate-pulse-glow"
+                className="absolute top-3  right-0 z-20  text-[#355491] text-sm md:text-base font-semibold px-5 py-2 rounded-l-md shadow-lg backdrop-blur-sm bg-opacity-90 animate-pulse-glow"
               >
                 À partir de {cat.startPrice}
                 <span className="absolute top-1 right-2  text-gray-500 text-[10px] font-bold ">

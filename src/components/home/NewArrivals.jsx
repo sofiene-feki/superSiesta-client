@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { getNewArrivals } from "../../functions/product"; // API call
 import Product from "../product/Product";
 import { LoadingProduct, NextArrow, PrevArrow } from "../ui";
+import { Link } from "react-router-dom";
 
 export default function NewArrivals() {
   const [products, setProducts] = useState([]);
@@ -80,22 +81,28 @@ export default function NewArrivals() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl md:mb-16 py-4 md:py-8 sm:px-6 sm:py-8">
-      <div className="flex px-2 items-center justify-between ">
+    <div className="mx-auto max-w-7xl md:mb-8 py-4 md:py-8 sm:px-6 sm:py-8">
+      <div className="flex px-2 items-center mb-2 justify-between ">
         <h2 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900">
           Dernières Nouveautés
         </h2>
-        <h2 className="cursor-pointer text-blue-600 font-semibold hover:underline">
-          Voir tous →
-        </h2>
+        <Link to="/shop">
+          {" "}
+          <h2 className="cursor-pointer text-blue-600 font-semibold hover:underline">
+            Voir tous →
+          </h2>
+        </Link>
       </div>
 
       {loading ? (
         <LoadingProduct length={isMobile ? 1 : 4} cols={4} />
       ) : (
-        <Slider {...(isMobile ? mobileSettings : desktopSettings)}>
+        <Slider
+          className="shadow-lg md:shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-white md:border md:border-gray-200"
+          {...(isMobile ? mobileSettings : desktopSettings)}
+        >
           {products.map((product) => (
-            <div key={product._id} className="py-3 px-1">
+            <div key={product._id} className="py-3 px-2">
               <Product product={product} />
             </div>
           ))}

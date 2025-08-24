@@ -149,12 +149,12 @@ export default function OrderDetail() {
                       <div>{item.name}</div>
                       {item.selectedColor && (
                         <div className="text-xs text-gray-500">
-                          Couleur: {item.selectedColor.label}
+                          Couleur: {item.selectedColor}
                         </div>
                       )}
                       {item.selectedSize && (
                         <div className="text-xs text-gray-500">
-                          Taille: {item.selectedSize.label}
+                          Taille: {item.selectedSize}
                         </div>
                       )}
                     </td>

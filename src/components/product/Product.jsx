@@ -17,8 +17,8 @@ export default function Product({ product, productsPerPage, loading }) {
   const imageAlt = mainMedia ? mainMedia.alt : product.name;
 
   // Get first color name or empty string
-  const firstColor = product.colors?.[0]?.name || "";
-  const firstSize = product.sizes?.[0]?.name || "M";
+  const firstColor = product.colors?.[0] || "";
+  const firstSize = product.sizes?.[0] || "M";
 
   const handleAddToCart = () => {
     console.log("Adding to cart:", imageSrc);
