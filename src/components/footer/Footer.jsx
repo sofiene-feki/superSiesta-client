@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../assets/logo_supersiesta.png";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -76,14 +77,23 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-4 text-sm">
-              {["Home", "Shop", "About Us", "Contact"].map((text) => (
-                <li key={text}>
-                  <a
-                    href="#"
+              {[
+                {
+                  id: 1,
+                  name: "Home",
+                  link: "/",
+                },
+                { id: 2, name: "Shop", link: "/shop" },
+                { id: 3, name: "About", link: "/about" },
+                { id: 4, name: "Contact", link: "/contact" },
+              ].map((text) => (
+                <li key={text.id}>
+                  <Link
+                    to={text.link}
                     className="text-gray-700 hover:text-[#87a736] transition-colors duration-200"
                   >
-                    {text}
-                  </a>
+                    {text.name}
+                  </Link>
                 </li>
               ))}
             </ul>

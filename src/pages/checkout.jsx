@@ -5,6 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../redux/cart/cartSlice";
 import { createOrder } from "../functions/order";
+import tn from "../assets/tn.jpg";
 
 export default function CheckoutPage() {
   const cartItems = useSelector((state) => state.cart.items);
@@ -149,14 +150,32 @@ export default function CheckoutPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Numéro de Téléphone
               </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              />
+              <div className="flex items-center border rounded-md overflow-hidden">
+                <span className="flex items-center gap-2 px-3 bg-gray-50 ">
+                  <img
+                    src={tn}
+                    alt="Tunisia flag"
+                    className="h-4 w-6 object-cover"
+                  />
+                  <span className="text-sm text-gray-700">+216</span>
+                </span>
+
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    handleChange({
+                      target: {
+                        name: "phone",
+                        value: e.target.value.replace(/\D/g, "").slice(0, 8), // only digits, max 8
+                      },
+                    })
+                  }
+                  required
+                  className="w-full p-2 text-sm outline-none"
+                />
+              </div>
             </div>
 
             <div>

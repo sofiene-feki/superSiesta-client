@@ -5,6 +5,7 @@ import { authStart, authSuccess, authFailure } from "../redux/user/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../service/firebase";
 import logo from "../assets/logo_supersiesta.png";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -30,7 +31,10 @@ export default function Login() {
 
       navigate("/");
     } catch (err) {
-      dispatch(authFailure(err.message));
+      const errorMessage = "Identifiants de connexion invalides";
+
+      dispatch(authFailure(errorMessage));
+      toast.error(errorMessage);
     }
   };
 

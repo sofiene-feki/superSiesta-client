@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://supersiesta-server-i63m.onrender.com/api";
+const API_BASE_URL = "https://www.api.supersiesta.cloud/api";
 
 // Create a new product
 export const productCreate = async (formData) => {

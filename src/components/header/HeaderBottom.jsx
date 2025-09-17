@@ -27,7 +27,7 @@ export default function HeaderBottom() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const SERVER_URL = "https://supersiesta-server-i63m.onrender.com";
+  const SERVER_URL = "https://www.api.supersiesta.cloud";
 
   const normalizeMediaSrc = (input) => {
     if (!input) return input;
@@ -122,9 +122,46 @@ export default function HeaderBottom() {
   ];
 
   const category = [
-    { name: "tendresse", href: "#" },
-    { name: "pollow", href: "#" },
-    { name: "medico", href: "#" },
+    {
+      id: 1,
+      link: "/category/soft+",
+      name: "soft+",
+    },
+    {
+      id: 2,
+      link: "/category/venise+",
+      name: "venise+",
+    },
+    {
+      id: 3,
+      link: "/category/medico+",
+      name: "medico+",
+    },
+    {
+      id: 4,
+      link: "/category/relax+",
+      name: "relax+",
+    },
+    {
+      id: 5,
+      link: "/category/tendresse+",
+      name: "tendresse+",
+    },
+    {
+      id: 6,
+      link: "/category/topRelax+",
+      name: "topRelax+",
+    },
+    {
+      id: 7,
+      link: "/category/oreiller",
+      name: "oreiller",
+    },
+    {
+      id: 8,
+      link: "/category/protege",
+      name: "protege",
+    },
   ];
 
   function classNames(...classes) {
@@ -147,7 +184,7 @@ export default function HeaderBottom() {
               <MenuItem key={item.name}>
                 {({ active }) => (
                   <Link
-                    to={item.href}
+                    to={item.link}
                     className={`block px-4 py-2 text-sm text-gray-700 ${
                       active ? "bg-gray-100" : ""
                     }`}
@@ -192,10 +229,10 @@ export default function HeaderBottom() {
           </MenuButton>
           <MenuItems className="absolute left-0 mt-14 w-48 origin-top-left rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
             {category.map((item) => (
-              <MenuItem key={item.name}>
+              <MenuItem key={item.name} id={item.id}>
                 {({ active }) => (
                   <Link
-                    to={item.href}
+                    to={item.link}
                     className={`block px-4 py-2 text-sm text-gray-700 ${
                       active ? "bg-gray-100" : ""
                     }`}

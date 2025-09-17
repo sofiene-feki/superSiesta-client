@@ -91,6 +91,7 @@ export default function Shop() {
         console.error("❌ Error fetching products:", error);
       } finally {
         setLoading(false);
+        console.log(filter);
       }
     };
 
@@ -101,10 +102,6 @@ export default function Shop() {
   useEffect(() => {
     dispatch(setCurrentPage(0));
   }, [filter.selected, dispatch]);
-
-  useEffect(() => {
-    console.log(params, "paramssssss");
-  }, [params]);
 
   return (
     <div>

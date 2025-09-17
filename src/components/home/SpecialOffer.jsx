@@ -111,7 +111,7 @@ export default function SpecialOfferCard() {
   ).toFixed(2);
   const savings = +(originalPrice - discountedPrice).toFixed(2);
 
-  const BASE_URL = "https://supersiesta-server-i63m.onrender.com"; // Change this to your real base URL
+  const BASE_URL = "https://www.api.supersiesta.cloud"; // Change this to your real base URL
 
   return (
     <div className="max-w-7xl h-auto mx-auto bg-white border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row hover:shadow-2xl transition-shadow duration-300 relative">

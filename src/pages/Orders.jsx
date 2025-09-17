@@ -214,7 +214,7 @@ const Order = () => {
             pageSize={10}
             slots={{ toolbar: CustomToolbar }}
             slotProps={{
-              toolbar: { products },
+              toolbar: { products, fetchOrders },
             }}
             showToolbar
           />

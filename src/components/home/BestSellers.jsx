@@ -17,7 +17,7 @@ export default function NewArrivals() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const SERVER_URL = "https://supersiesta-server-i63m.onrender.com";
+  const SERVER_URL = "https://www.api.supersiesta.cloud";
 
   const normalizeMediaSrc = (input) => {
     if (!input) return input;

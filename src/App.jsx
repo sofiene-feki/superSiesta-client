@@ -19,6 +19,8 @@ import Footer from "./components/footer/Footer";
 import Category from "./pages/catrgory";
 import Contact from "./pages/contact";
 import Login from "./pages/login";
+import { ToastContainer } from "react-toastify";
+import FullBack from "./components/ui/Fullback";
 
 const LazyHome = lazy(() => import("./pages/home"));
 const LazyShop = lazy(() => import("./pages/shop"));
@@ -30,6 +32,7 @@ const LazyCategory = lazy(() => import("./pages/catrgory"));
 const LazyLogin = lazy(() => import("./pages/login"));
 const LazyOrders = lazy(() => import("./pages/Orders"));
 const LazyOrderDetail = lazy(() => import("./pages/OrderDetail"));
+const LazyNotFound = lazy(() => import("./pages/notFound"));
 
 function App() {
   const location = useLocation();
@@ -40,32 +43,22 @@ function App() {
 
   return (
     <>
-      <Suspense
-        fallback={
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100vh", // 100% of the viewport height
-            }}
-          >
-            <div>
-              <img
-                src={logo}
-                alt="Loading"
-                style={{ width: "auto", height: "100px" }}
-              />
-            </div>
-            <p style={{ marginTop: "10px" }}>Super siesta</p>
-          </div>
-        }
-      >
+      <Suspense fallback={<FullBack />}>
         {shouldShowHeader && <Header />}
         {shouldShowHeader && <HeaderBottom />}
         <Cart />
-
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <Routes>
           <Route path="/" element={<LazyHome />} />
           <Route path="login" element={<LazyLogin />} />
@@ -77,8 +70,7 @@ function App() {
           <Route path="Checkout" element={<LazyCheckoutPage />} />
           <Route path="/product/:slug" element={<LazyProductDetails />} />
           <Route path="/order/:id" element={<LazyOrderDetail />} />
-
-          <Route path="/*" element={"rawa7"} />
+          <Route path="/*" element={<LazyNotFound />} />
         </Routes>
 
         <Footer />

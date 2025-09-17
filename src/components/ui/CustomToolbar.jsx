@@ -68,7 +68,7 @@ const StyledTextField = styled(TextField)(({ theme, ownerState }) => ({
   // transition: theme.transitions.create(["width", "opacity"]),
 }));
 
-export default function CustomToolbar({ products }) {
+export default function CustomToolbar({ products, fetchOrders }) {
   const [exportMenuOpen, setExportMenuOpen] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false); // <- track search expand
   const [modalOpen, setModalOpen] = useState(false); // <-- modal state
@@ -159,7 +159,6 @@ export default function CustomToolbar({ products }) {
       console.log("✅ Order placed successfully:", response);
 
       // Show success dialog or toast
-      setIsOpen(true);
 
       // Optionally reset form
       setOrder({
@@ -173,7 +172,7 @@ export default function CustomToolbar({ products }) {
       console.error("❌ Error placing order:", error);
       alert("Une erreur est survenue. Veuillez réessayer.");
     }
-
+    fetchOrders();
     handleModalClose();
   };
 
