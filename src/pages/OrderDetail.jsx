@@ -94,15 +94,15 @@ export default function OrderDetail() {
             <p>
               <span className="font-medium">Téléphone:</span> {customer.phone}
             </p>
-            <p>
-              <span className="font-medium print:hidden">Email:</span>{" "}
+            <p className="print:hidden">
+              <span className="font-medium">Email:</span>{" "}
               {customer.email || "-"}
             </p>
             <p>
               <span className="font-medium">Adresse:</span> {customer.address}
             </p>
-            <p>
-              <span className="font-semibold print:hidden">Statut:</span>{" "}
+            <p className="print:hidden">
+              <span className="font-semibold">Statut:</span>{" "}
               {isAdmin ? (
                 <select
                   className="ml-2 border rounded px-2 py-1 text-sm"
