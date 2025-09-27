@@ -51,7 +51,7 @@ export default function Shop() {
   const start = currentPage * productsPerPage + 1;
   const end = Math.min((currentPage + 1) * productsPerPage, totalProducts);
 
-  const SERVER_URL = "https://supersiesta-server-i63m.onrender.com";
+  const SERVER_URL = "https://www.api.supersiesta.cloud";
 
   // Normalize single product or array of products
   const normalizeMediaSrc = (input) => {

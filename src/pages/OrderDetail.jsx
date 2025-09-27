@@ -95,14 +95,14 @@ export default function OrderDetail() {
               <span className="font-medium">Téléphone:</span> {customer.phone}
             </p>
             <p>
-              <span className="font-medium">Email:</span>{" "}
+              <span className="font-medium print:hidden">Email:</span>{" "}
               {customer.email || "-"}
             </p>
             <p>
               <span className="font-medium">Adresse:</span> {customer.address}
             </p>
             <p>
-              <span className="font-semibold">Statut:</span>{" "}
+              <span className="font-semibold print:hidden">Statut:</span>{" "}
               {isAdmin ? (
                 <select
                   className="ml-2 border rounded px-2 py-1 text-sm"
@@ -187,7 +187,7 @@ export default function OrderDetail() {
         <div className="mt-8 md:text-sm text-xs flex justify-between text-center text-gray-500 print:text-black print:mt-12">
           <p className="mb-1"></p>
           <p className="mb-1">
-            Tél : +216 12 345 678{" "}
+            Tél : +216 58 811 911{" "}
             <span className="ml-2">Email : contact@supersiesta.tn</span>
           </p>
         </div>
